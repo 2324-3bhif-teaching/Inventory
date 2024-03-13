@@ -1,0 +1,33 @@
+
+= Projektantrag: Inventarisierungssoftware von Hardware-Komponenten für Roboterstation beim Tag der offenen Tür
+
+== Zusammenfassung
+Das Projekt beinhaltet die Entwicklung einer Software zur Inventarisierung aller Hardware-Komponenten für die
+Roboterstation, die während des Tags der offenen Tür an der HTL Leonding präsentiert
+wird. Ziel ist es, eine Verwaltungssoftware aller Hardware-Komponenten zu erstellen, um
+eine reibungslose Präsentation sicherzustellen und potenzielle Bedürfnisse für Wartung oder Erneuerung zu identifizieren.
+
+
+== Ziele
+
+- Erfassung einer vollständigen Liste aller Hardware-Komponenten der Roboterstation.
+- Überprüfung der Verfügbarkeit, des Zustands und der Funktionsfähigkeit jeder Komponente.
+- Festlegung der Standorte und Verbindungen jeder Komponente innerhalb der Roboterstation.
+- Das Hinzufügen, Entfernen oder Aktualisieren von Hardware-Komponenten in der Software.
+- Erstellung von Berichten über den Zustand und die Verfügbarkeit der Hardware-Komponenten. (Notizen)
+
+== Konsequenzen bei Nichtdurchführung
+
+- Schlechter Überblick über die Verfügbarkeit und den Zustand der Hardware-Komponenten.
+- Mögliche Beschädigung oder Verlust von Hardware-Komponenten.
+- Unvollständige oder fehlerhafte Präsentation der Roboterstation.
+
+== Personelle Ressourcen
+
+- Benjamin Wilflingseder: Projektleiter, Softwareentwickler
+- David Schwab: Softwareentwickler
+
+== Budget
+Das Projekt erfordert keine zusätzlichen finanziellen Mittel, da alle
+benötigten Ressourcen intern verfügbar sind. Die Entwicklung der Software erfolgt in den wöchentlichen
+3 Einheiten des Moduls "Systemplanung und Projektentwicklung".

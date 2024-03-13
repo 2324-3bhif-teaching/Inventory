@@ -1,0 +1,47 @@
+= Projektbezeichnung: Entwicklung einer Inventarisierungssoftware für Hardware-Komponenten der Roboterstation
+
+== Auftraggeber
+HTL Leonding
+
+== Projekthintergrund
+Der regelmäßige Einsatz der Roboterstation bei Veranstaltungen wie dem Tag der offenen Tür erfordert eine zuverlässige Inventarisierung und Verwaltung ihrer Hardware-Komponenten, um eine reibungslose Präsentation sicherzustellen und Wartungs- oder Erneuerungsbedürfnisse zu identifizieren.
+
+== Projektendergebnis
+Die Entwicklung einer voll funktionsfähigen Inventarisierungssoftware für die Hardware-Komponenten der Roboterstation, die eine einfache Verwaltung, Überprüfung und Berichterstellung ermöglicht.
+
+== Projektziele
+1. Erfassung einer vollständigen Liste aller Hardware-Komponenten.
+2. Überprüfung der Verfügbarkeit, des Zustands und der Funktionsfähigkeit jeder Komponente.
+3. Festlegung der Standorte und Verbindungen der Komponenten innerhalb der Roboterstation.
+4. Implementierung von Funktionen zum Hinzufügen, Entfernen oder Aktualisieren von Hardware-Komponenten.
+5. Generierung von Berichten über den Zustand und die Verfügbarkeit der Hardware-Komponenten.
+
+== Projektbeschreibung
+Das Projekt umfasst die Entwicklung einer benutzerfreundlichen Software zur Verwaltung der Hardware-Komponenten der Roboterstation. Die Software wird es ermöglichen, alle Komponenten zu erfassen, ihren Zustand zu überprüfen, ihre Standorte festzulegen und Berichte zu generieren.
+
+== Meilensteine
+1. Anforderungsanalyse abgeschlossen
+2. Entwurf der Softwarearchitektur abgeschlossen
+3. Entwicklung der Software abgeschlossen
+4. Testphase abgeschlossen
+5. Implementierung der Software in der Roboterstation abgeschlossen
+
+== Projektstart
+Februar 2024
+
+
+== Projektende
+Juni 2024
+
+== Projektressourcen
+- Benjamin Wilflingseder: Projektleiter, Softwareentwickler
+- David Schwab: Softwareentwickler
+- Interne Ressourcen der HTL Leonding für Entwicklung und Implementierung
+
+== Projektrisiken
+- Verzögerungen aufgrund von unerwarteten technischen Herausforderungen
+- Mangelnde Koordination zwischen den Projektbeteiligten
+- Änderungen der Anforderungen während des Entwicklungsprozesses
+
+== Projektorganisation
+Das Projekt wird von Benjamin Wilflingseder als Projektleiter geleitet. David Schwab ist als Softwareentwickler im Projektteam tätig. Die Kommunikation und Koordination erfolgt regelmäßig zwischen den Projektbeteiligten sowie mit den Stakeholdern der HTL Leonding.

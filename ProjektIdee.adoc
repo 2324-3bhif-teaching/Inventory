@@ -1,0 +1,9 @@
+= Projektidee
+
+== Ist-Zustand
+
+Die Verwaltung der Hardware-Komponenten der Roboterstation während des Tags der offenen Tür an der Informatikschule erfolgt derzeit ohne strukturiertes Inventarsystem. Es gibt keine klare Liste oder Dokumentation der vorhandenen Teile, was zu ineffizientem Ressourcenmanagement und potenziellen Engpässen während des Events führt.
+
+== Soll-Zustand
+
+Durch Implementierung eines klar strukturierten Inventarsystems erfolgt eine umfassende Erfassung und Dokumentation sämtlicher Hardware-Komponenten der Roboterstation. Dies ermöglicht ein effizientes Ressourcenmanagement sowie die rechtzeitige Identifizierung von Wartungs- oder Erneuerungsbedarf.
