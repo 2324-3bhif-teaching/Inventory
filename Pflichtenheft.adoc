@@ -35,7 +35,7 @@ Projekt vollendet:: Juni 2024
 
 == Meilensteine
 Anforderungsanalyse abgeschlossen:: März 2024
-Softwarearchitektur-Entwurf abgeschlossen:: März 2024
+Softwarearchitektur-Entwurf abgeschlossen:: April 2024
 Backend-Entwicklung abgeschlossen:: April 2024
 Frontend-Entwicklung abgeschlossen:: Mai 2024
 Testphase abgeschlossen:: Mai 2024
