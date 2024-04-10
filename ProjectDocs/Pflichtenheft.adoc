@@ -48,10 +48,10 @@ Optionen zur Überprüfung und Verwaltung von Komponenten sollten leicht zugäng
 
 === Mockups
 
-image::src/login.png[Login Seite]
-image::src/main_ansicht.png[Dashboard]
-image::src/karte_ausgeklappt.png[Detaillierte Ansicht]
-image::src/neuesGerät.png[Neues Gerät hinzufügen]
+image::/src/login.png[Login Seite]
+image::/src/main_ansicht.png[Dashboard]
+image::/src/karte_ausgeklappt.png[Detaillierte Ansicht]
+image::/src/neuesGerät.png[Neues Gerät hinzufügen]
 
 
 
