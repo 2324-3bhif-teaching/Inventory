@@ -2,8 +2,10 @@
 
 == Ist-Zustand
 
-Die Verwaltung der Hardware-Komponenten der Roboterstation während des Tags der offenen Tür an der Informatikschule erfolgt derzeit ohne strukturiertes Inventarsystem. Es gibt keine klare Liste oder Dokumentation der vorhandenen Teile, was zu ineffizientem Ressourcenmanagement und potenziellen Engpässen während des Events führt.
+Die Verwaltung der Hardware-Komponenten der Roboterstation während des Tags der offenen Tür an der HTL erfolgt derzeit ohne strukturiertes Inventarsystem. Es gibt keine klare Liste oder Dokumentation der vorhandenen Teile, was zu ineffizientem Ressourcenmanagement und potenziellen Engpässen während des Events führt.
 
 == Soll-Zustand
 
-Durch Implementierung eines klar strukturierten Inventarsystems erfolgt eine umfassende Erfassung und Dokumentation sämtlicher Hardware-Komponenten der Roboterstation. Dies ermöglicht ein effizientes Ressourcenmanagement sowie die rechtzeitige Identifizierung von Wartungs- oder Erneuerungsbedarf.
+Durch Implementierung eines klar strukturierten webbasierten Inventarsystems sollen die folgenden Ziele erreicht werden:
+
+Durch die Einführung des Inventarsystems sollen die Hardware-Komponenten der Roboterstation effizient verwaltet werden. Dies ermöglicht eine klare Übersicht über die vorhandenen Teile, deren Zustand und deren Verfügbarkeit. Die Geräte werden mit eindeutigen Nummern versehen, die man dann im Inventar einsehen kann. Man kann die Geräte dann sortieren, filtern und suchen. Wenn man sich ein Gerät ausleiht, kann man dieses als nicht verfügbar markieren; sollte ein Gerät kaputtgehen, kann man dies ebenfalls eintragen.  Durch die Einführung einer Administrator-Rolle können nur berechtigte Personen Änderungen am Inventar vornehmen, die Änderungsmöglichkeiten beinhalten: einführen, bearbeiten und löschen von Kategorien; anlegen neuer Geräte und verwalten von Benutzern. Die Benutzer können die Geräte dann nur einsehen und als nicht verfügbar oder defekt markieren.
