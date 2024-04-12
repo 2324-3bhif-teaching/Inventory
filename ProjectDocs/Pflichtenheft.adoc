@@ -17,7 +17,6 @@ Erfassung von Hardware-Komponenten:: Die Software muss die Möglichkeit bieten, 
 Standortverwaltung:: Die Software sollte es ermöglichen, den Standort jeder Komponente innerhalb der Roboterstation festzulegen.
 Verwaltungsfunktionen:: Es müssen Funktionen implementiert werden, um Komponenten hinzuzufügen, zu entfernen oder zu aktualisieren.
 Kamera-Integration:: Die Software sollte die Integration von Kameras ermöglichen, um Bilder von Komponenten aufzunehmen und zu speichern.
-QR-Code-Scannung:: Die Software sollte die Möglichkeit bieten, QR-Codes zu scannen, um die Erfassung und Überprüfung von Komponenten zu erleichtern.
 
 
 
