@@ -34,12 +34,7 @@ Testphase:: Mai 2024
 Projekt vollendet:: Juni 2024
 
 == Meilensteine
-Anforderungsanalyse abgeschlossen:: März 2024
-Softwarearchitektur-Entwurf abgeschlossen:: April 2024
-Backend-Entwicklung abgeschlossen:: April 2024
-Frontend-Entwicklung abgeschlossen:: Mai 2024
-Testphase abgeschlossen:: Mai 2024
-Projekt vollendet:: Juni 2024
+Hier zu sehen: link:Meilensteine.adoc[Meilensteine]
 
 == Benutzeroberfläche
 Die Benutzeroberfläche sollte übersichtlich gestaltet sein und einfache Navigation bieten.

@@ -10,28 +10,26 @@ Der regelmäßige Einsatz der Roboterstation bei Veranstaltungen wie dem Tag der
 Die Entwicklung einer voll funktionsfähigen Inventarisierungssoftware für die Hardware-Komponenten der Roboterstation, die eine einfache Verwaltung, Überprüfung und Berichterstellung ermöglicht.
 
 == Projektziele
-1. Erfassung einer vollständigen Liste aller Hardware-Komponenten.
-2. Überprüfung der Verfügbarkeit, des Zustands und der Funktionsfähigkeit jeder Komponente.
-3. Festlegung der Standorte und Verbindungen der Komponenten innerhalb der Roboterstation.
-4. Implementierung von Funktionen zum Hinzufügen, Entfernen oder Aktualisieren von Hardware-Komponenten.
-5. Generierung von Berichten über den Zustand und die Verfügbarkeit der Hardware-Komponenten.
+1. Einführung eines klar strukturierten, webbasierten Inventarsystems für die effiziente Verwaltung der Hardware-Komponenten der Roboterstation.
+2. Bereitstellung einer klaren Übersicht über vorhandene Teile, ihren Zustand und ihre Verfügbarkeit durch die Vergabe eindeutiger Nummern und deren Verknüpfung im Inventar.
+3. Möglichkeit zum Sortieren, Filtern und Suchen von Geräten innerhalb des Inventars.
+4. Kennzeichnung von ausgeliehenen Geräten als nicht verfügbar und Eintragung von defekten Geräten für eine präzise Bestandsverwaltung.
+5. Einführung einer Administrator-Rolle zur Kontrolle und Beschränkung von Änderungsberechtigungen am Inventar.
+6. Berechtigte Personen können Kategorien einführen, bearbeiten und löschen sowie neue Geräte anlegen und Benutzer verwalten.
+7. Benutzer können Geräte einsehen und deren Verfügbarkeit oder Defekt markieren, ohne jedoch Änderungen an den Inventardaten vornehmen zu können.
 
 == Projektbeschreibung
 Das Projekt umfasst die Entwicklung einer benutzerfreundlichen Software zur Verwaltung der Hardware-Komponenten der Roboterstation. Die Software wird es ermöglichen, alle Komponenten zu erfassen, ihren Zustand zu überprüfen, ihre Standorte festzulegen und Berichte zu generieren.
 
 == Meilensteine
-1. Anforderungsanalyse abgeschlossen
-2. Entwurf der Softwarearchitektur abgeschlossen
-3. Entwicklung der Software abgeschlossen
-4. Testphase abgeschlossen
-5. Implementierung der Software in der Roboterstation abgeschlossen
+Hier zu sehen: link:Meilensteine.adoc[Meilensteine]
 
 == Projektstart
-Februar 2024
+03.Februar 2024
 
 
 == Projektende
-Juni 2024
+19.Juni 2024
 
 == Projektressourcen
 - Benjamin Wilflingseder: Projektleiter, Softwareentwickler
