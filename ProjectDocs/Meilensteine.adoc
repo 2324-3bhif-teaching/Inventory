@@ -7,6 +7,7 @@
 | Planung | 03.04.2024 | Festlegung der Projektziele, -struktur und -organisation
 | Durchführung | 17.04.2024 | Projektstruktur fertig aufgesetzt
 | Durchführung | 24.04.2024 | Datenbank aufgesetzt
+| Durchführung | 24.04.2024 | Server aufgesetzt
 | Durchführung | 24.04 2024 | Neue Geräte können hinzugefügt werden
 | Durchführung | 01.05.2024 | Geräte können als defekt markiert werden
 | Durchführung | 01.05.2024 | Geräte können nach Kategorien gefiltert werden
