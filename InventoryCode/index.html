@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTL-Leonding - Inventar</title>
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.css"/>
+    <script src="https://kit.fontawesome.com/02f4eda956.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="img/HTLLOGO.ico">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="src/app.ts"></script>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo-details">
+        <a href="index.html"><img id="logo" src="img/HTL-Leonding-Logo.png" alt="Logo HTL"></a>
+        <i class="fa-solid fa-bars" id="btn"></i>
+    </div>
+    <ul class="nav-list">
+        <li>
+            <a href="">
+                <i class="fa-solid fa-warehouse"></i>
+                <span class="links_name">Alle Geräte</span>
+            </a>
+            <span class="tooltip">Alle Geräte</span>
+        </li>
+        <li>
+            <i class='bx bx-search' ></i>
+            <input type="text" id="land-filter" placeholder="Suche...">
+            <span class="tooltip">Suche</span>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-robot"></i>
+                <span class="links_name">Roboter</span>
+            </a>
+            <span class="tooltip">Roboter</span>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-gamepad"></i>
+                <span class="links_name">Eingabegeräte</span>
+            </a>
+            <span class="tooltip">Eingabegeräte</span>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-ethernet"></i>
+                <span class="links_name">Kabel</span>
+            </a>
+            <span class="tooltip">Kabel</span>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-camera"></i>
+                <span class="links_name">Kameras</span>
+            </a>
+            <span class="tooltip">Kameras</span>
+        </li>
+    </ul>
+</div>
+<script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+
+    closeBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("open");
+    });
+</script>
+</body>
+</html>
