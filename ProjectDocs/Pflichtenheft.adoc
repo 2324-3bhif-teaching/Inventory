@@ -1,5 +1,8 @@
 = Pflichtenheft: Entwicklung einer Inventarisierungssoftware für Hardware-Komponenten der Roboterstation
 
+Keycloak, QR-Codes dies das
+
+
 == Einleitung
 Das vorliegende Pflichtenheft dient als Leitfaden für die Entwicklung einer Inventarisierungssoftware für die Hardware-Komponenten der Roboterstation im Auftrag der HTL Leonding.
 
