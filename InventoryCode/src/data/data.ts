@@ -29,6 +29,17 @@ export class DB {
     }
 
     private static async ensureTablesCreated(connection: Database): Promise<void> {
+        await connection.run(`
+        CREATE TABLE IF NOT EXISTS Item (
+            ItemNumber NUMBER PRIMARY KEY,
+            ItemName VARCHAR2(15) NOT NULL,
+            Description VARCHAR2(100),
+            Available VARCHAR2(1) DEFAULT 'N',
+            Damaged VARCHAR2(1) DEFAULT 'N',
+            Category VARCHAR2(15),
+            Picture BLOB
+        )
+    `);
 
     }
 }
