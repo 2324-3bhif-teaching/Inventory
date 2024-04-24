@@ -7,4 +7,16 @@ Die derzeitige Verwaltung der Hardware-Komponenten der Roboterstation während d
 === Soll-Zustand
 Durch Implementierung eines klar strukturierten webbasierten Inventarsystems sollen die folgenden Ziele erreicht werden:
 
-Durch die Einführung des Inventarsystems sollen die Hardware-Komponenten der Roboterstation effizient verwaltet werden. Dies ermöglicht eine klare Übersicht über die vorhandenen Teile, deren Zustand und deren Verfügbarkeit. Die Geräte werden mit eindeutigen Nummern versehen, die man dann im Inventar einsehen kann. Man kann die Geräte dann sortieren, filtern und suchen. Wenn man sich ein Gerät ausleiht, kann man dieses als nicht verfügbar markieren; sollte ein Gerät kaputtgehen, kann man dies ebenfalls eintragen.  Durch die Einführung eines Audit-Logs wird die Nachverfolgung von Änderungen am Inventar ermöglicht. Dies erleichtert die Identifizierung von Fehlern und die Rückverfolgung von Änderungen. Diese Logs können auch dazu verwendet werden, um die Verantwortlichkeit für Verluste oder Schäden an Hardware-Komponenten zu klären. Die Logs sind Passwort gesichert, sodass nicht jeder Zugriff darauf hat. Durch die Erstellung von Berichten über den Zustand und die Verfügbarkeit von Hardware-Komponenten wird die Planung und Organisation des Tags der offenen Tür erleichtert. Diese Berichte ermöglichen es den Organisatoren, Engpässe zu identifizieren und rechtzeitig Maßnahmen zu ergreifen, um sicherzustellen, dass alle benötigten Teile verfügbar sind.
+Durch die Einführung des Inventarsystems sollen die Hardware-Komponenten
+der Roboterstation effizient verwaltet werden. Dies ermöglicht eine
+klare Übersicht über die vorhandenen Teile, deren
+Zustand und deren Verfügbarkeit. Die Geräte werden
+mit eindeutigen Nummern versehen, die man dann im Inventar einsehen kann.
+Man kann die Geräte dann *sortieren*, *filtern* und *suchen*. Wenn man sich ein
+Gerät ausleiht, kann man dieses als *nicht verfügbar markieren*; sollte ein
+Gerät *kaputtgehen*, kann man dies ebenfalls eintragen. Durch die Einführung
+eines *Audit-Logs* wird die Nachverfolgung von Änderungen am Inventar ermöglicht. Dies erleichtert die Identifizierung von Fehlern und die Rückverfolgung von Änderungen. Diese Logs können auch dazu verwendet werden, um die Verantwortlichkeit für Verluste oder Schäden an Hardware-Komponenten zu klären. Die Logs sind Passwort gesichert, sodass nicht jeder Zugriff darauf hat. Durch die Erstellung von Berichten über den Zustand und die Verfügbarkeit von Hardware-Komponenten wird die Planung und Organisation des Tags der offenen Tür erleichtert. Diese Berichte ermöglichen es den Organisatoren, Engpässe zu identifizieren und rechtzeitig Maßnahmen zu ergreifen, um sicherzustellen, dass alle benötigten Teile verfügbar sind.
+Für jedes Gerät soll ein *QR-Code* *erstellt* werden, der auf das Inventar
+verweist. Dieser QR-Code soll auf dem Gerät angebracht werden. Mit einer
+Kamera kann man diesen QR-Code *scannen* und wird direkt auf
+die Informationsansicht der Komponente  weitergeleitet.
