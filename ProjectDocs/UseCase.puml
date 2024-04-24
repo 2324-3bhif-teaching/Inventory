@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Benutzer as User
+rectangle "Inventarisierungssoftware" {
+  usecase "Hardware-Komponente hinzufügen" as UC1
+  usecase "Zustand überprüfen" as UC2
+  usecase "Komponente aktualisieren" as UC3
+  usecase "Komponente entfernen" as UC4
+  usecase "Komponente suchen" as UC5
+  usecase "Komponenten filtern" as UC6
+  usecase "Komponenten sortieren" as UC7
+  usecase "Kategorien verwalten" as UC8
+  usecase "Komponenten Kategorisieren" as UC9
+  usecase "Login" as UC10
+  usecase "Logout" as UC11
+  usecase "QR-Code für Komponente generieren" as UC12
+  usecase "QR-Code scannen" as UC13
+  usecase "QR-Code drucken" as UC14
+
+  User --> UC1
+  User --> UC2
+  User --> UC3
+  User --> UC4
+  User --> UC5
+  User --> UC6
+  User --> UC7
+  User --> UC8
+  User --> UC9
+  User --> UC10
+  User --> UC11
+  User --> UC12
+  User --> UC13
+  User --> UC14
+}
+@enduml

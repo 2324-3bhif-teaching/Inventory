@@ -11,6 +11,7 @@ Erfassung einer vollständigen Liste aller Hardware-Komponenten.
 Überprüfung der Verfügbarkeit, des Zustands und der Funktionsfähigkeit jeder Komponente.
 Festlegung der Standorte und Verbindungen der Komponenten innerhalb der Roboterstation.
 Implementierung von Funktionen zum Hinzufügen, Entfernen oder Aktualisieren von Hardware-Komponenten.
+Implementierung von Generierung und Scannen von QR-Codes für jede Komponente.
 Generierung von Berichten über den Zustand und die Verfügbarkeit der Hardware-Komponenten.
 
 == Anforderungen
@@ -20,6 +21,8 @@ Erfassung von Hardware-Komponenten:: Die Software muss die Möglichkeit bieten, 
 Standortverwaltung:: Die Software sollte es ermöglichen, den Standort jeder Komponente innerhalb der Roboterstation festzulegen.
 Verwaltungsfunktionen:: Es müssen Funktionen implementiert werden, um Komponenten hinzuzufügen, zu entfernen oder zu aktualisieren.
 Kamera-Integration:: Die Software sollte die Integration von Kameras ermöglichen, um Bilder von Komponenten aufzunehmen und zu speichern.
+QR-Code-Generierung:: Es sollte eine Funktion geben, um QR-Codes für jede Komponente zu generieren und zu drucken.
+QR-Code-Scannen:: Die Software sollte die Möglichkeit bieten, QR-Codes zu scannen, um Informationen zu den Komponenten anzuzeigen.
 
 
 
