@@ -8,12 +8,12 @@
 | Durchführung | 17.04.2024 | Projektstruktur fertig aufgesetzt
 | Durchführung | 24.04.2024 | Datenbank aufgesetzt
 | Durchführung | 24.04.2024 | Server aufgesetzt
-| Durchführung | 24.04 2024 | Neue Geräte können hinzugefügt werden
+| Durchführung | 01.05 2024 | Neue Geräte können hinzugefügt werden
 | Durchführung | 01.05.2024 | Geräte können als defekt markiert werden
 | Durchführung | 01.05.2024 | Geräte können nach Kategorien gefiltert werden
 | Durchführung | 08.05.2024 | Geräte können ausgeliehen und zurückgegeben werden (verfügbar / nicht verfügbar)
-| Durchführung | 08.05.2024 | Kategorien können hinzugefügt, bearbeitet und gelöscht werden (Admin)
-| Durchführung | 15.05.2024 | Geräte können gelöscht und bearbeitet werden (Admin)
+| Durchführung | 08.05.2024 | Kategorien können hinzugefügt, bearbeitet und gelöscht werden
+| Durchführung | 15.05.2024 | Geräte können gelöscht und bearbeitet werden
 | Durchführung | 29.05.2024 | Frontend fertiggestellt
 | Durchführung | 05.06.2024 | Styling und Erstellung Login
 | Durchführung | 19.06.2024 | Testphase abgeschlossen

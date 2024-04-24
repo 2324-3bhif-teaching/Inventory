@@ -14,9 +14,9 @@ Die Entwicklung einer voll funktionsfähigen Inventarisierungssoftware für die 
 2. Bereitstellung einer klaren Übersicht über vorhandene Teile, ihren Zustand und ihre Verfügbarkeit durch die Vergabe eindeutiger Nummern und deren Verknüpfung im Inventar.
 3. Möglichkeit zum Sortieren, Filtern und Suchen von Geräten innerhalb des Inventars.
 4. Kennzeichnung von ausgeliehenen Geräten als nicht verfügbar und Eintragung von defekten Geräten für eine präzise Bestandsverwaltung.
-5. Einführung einer Administrator-Rolle zur Kontrolle und Beschränkung von Änderungsberechtigungen am Inventar.
-6. Berechtigte Personen können Kategorien einführen, bearbeiten und löschen sowie neue Geräte anlegen und Benutzer verwalten.
-7. Benutzer können Geräte einsehen und deren Verfügbarkeit oder Defekt markieren, ohne jedoch Änderungen an den Inventardaten vornehmen zu können.
+5. Einführung eines Audit-Logs um Änderungen nachvollziehen zu können.
+6. Benutzer können Kategorien hinzufügen, bearbeiten oder löschen.
+7. Benutzer können Geräte einsehen und deren Verfügbarkeit oder Defekt markieren.
 
 == Projektbeschreibung
 Das Projekt umfasst die Entwicklung einer benutzerfreundlichen Software zur Verwaltung der Hardware-Komponenten der Roboterstation. Die Software wird es ermöglichen, alle Komponenten zu erfassen, ihren Zustand zu überprüfen, ihre Standorte festzulegen und Berichte zu generieren.
