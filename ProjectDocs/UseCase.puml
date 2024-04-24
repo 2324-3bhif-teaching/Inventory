@@ -15,6 +15,9 @@ rectangle "Inventarisierungssoftware" {
   usecase "Komponenten Kategorisieren" as UC9
   usecase "Login" as UC10
   usecase "Logout" as UC11
+  usecase "QR-Code für Komponente generieren" as UC12
+  usecase "QR-Code scannen" as UC13
+  usecase "QR-Code drucken" as UC14
 
   User --> UC1
   User --> UC2
@@ -27,5 +30,8 @@ rectangle "Inventarisierungssoftware" {
   User --> UC9
   User --> UC10
   User --> UC11
+  User --> UC12
+  User --> UC13
+  User --> UC14
 }
 @enduml
