@@ -34,12 +34,32 @@ export class DB {
             ItemNumber NUMBER PRIMARY KEY,
             ItemName VARCHAR2(15) NOT NULL,
             Description VARCHAR2(100),
-            Available VARCHAR2(1) DEFAULT 'N',
+            Available VARCHAR2(1) DEFAULT 'Y',
             Damaged VARCHAR2(1) DEFAULT 'N',
             Category VARCHAR2(15),
             Picture BLOB
         )
     `);
+
+        const itemData = {
+            ItemNumber: 1,
+            ItemName: 'Item1',
+            Description: 'This is item 1',
+            Available: 'Y',
+            Damaged: 'N',
+            Category: 'Category1',
+            Picture: null // replace with actual BLOB data for a picture if available
+        };
+
+        await connection.run('INSERT INTO Item (ItemNumber, ItemName, Description, Available, Damaged, Category, Picture) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            itemData.ItemNumber,
+            itemData.ItemName,
+            itemData.Description,
+            itemData.Available,
+            itemData.Damaged,
+            itemData.Category,
+            itemData.Picture
+        );
 
     }
 }
