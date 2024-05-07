@@ -129,22 +129,13 @@
 <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
-    let toggleButton = document.getElementById('toggleButton');
-    let extraContent = document.getElementById('extraContent');
 
     closeBtn.addEventListener("click", ()=>{
         sidebar.classList.toggle("open");
     });
 
-    toggleButton.addEventListener("click", function () {
-        extraContent.classList.toggle("show-content");
-    });
-
-
 </script>
 <script type="module" src="src/dist/devicePopup.js" defer> </script>
 <script type="module" src="src/dist/fetchItems.js" defer> </script>
-<script type="module" src="src/dist/updateItems.js" defer> </script>
-
 </body>
 </html>

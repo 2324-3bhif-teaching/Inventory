@@ -14,7 +14,8 @@ const ItemRouter_1 = require("./Router/ItemRouter");
 const app = (0, express_1.default)();
 // mount middleware
 app.use((0, cors_1.default)());
-app.use(express_1.default.json()); // parse JSON data and place result in req.body
+app.use(express_1.default.json());
+app.use(express_1.default.static("./index.html"));
 // mount router(s)
 app.use("/api/items", ItemRouter_1.itemRouter);
 // start http server

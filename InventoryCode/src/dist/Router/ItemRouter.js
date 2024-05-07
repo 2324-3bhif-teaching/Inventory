@@ -13,9 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.itemRouter = void 0;
+// import modules
 const express_1 = __importDefault(require("express"));
 const http_status_codes_1 = require("http-status-codes");
 const data_1 = require("../data/data");
+// create router
 exports.itemRouter = express_1.default.Router();
 exports.itemRouter.get('/', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

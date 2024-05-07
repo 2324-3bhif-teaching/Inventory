@@ -12,7 +12,7 @@ const app = express();
 
 // mount middleware
 app.use(cors());
-app.use(express.json());// parse JSON data and place result in req.body
+app.use(express.json());
 app.use(express.static("./index.html"));
 
 // mount router(s)

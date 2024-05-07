@@ -39,7 +39,7 @@ interface ItemUpdatePayload {
     category?: string;
     available: 'Y' | 'N';
     damaged: 'Y' | 'N';
-    picture?: Buffer; // Use appropriate type for the picture
+    picture?: Buffer;
 }
 
 itemRouter.put('/:itemId', async (req, res) => {
