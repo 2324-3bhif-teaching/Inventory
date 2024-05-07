@@ -1,7 +1,9 @@
+// import modules
 import express from "express";
 import { StatusCodes } from "http-status-codes";
 import { DB } from "../data/data";
 
+// create router
 export const itemRouter = express.Router();
 
 itemRouter.get('/', async (_, res) => {
