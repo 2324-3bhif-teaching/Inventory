@@ -15,9 +15,10 @@ app.use(cors());
 app.use(express.json());    // parse JSON data and place result in req.body
 
 // mount router(s)
-app.use("/api/item", itemRouter);
+app.use("/api/items", itemRouter);
 
 // start http server
 app.listen(3000, () => {
     console.log("Server listening on port 3000");
 });
+

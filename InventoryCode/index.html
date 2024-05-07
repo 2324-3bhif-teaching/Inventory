@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/02f4eda956.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="img/HTLLOGO.ico">
     <link rel="stylesheet" href="style/style.css">
-    <script src="src/app.ts"></script>
+
 </head>
 <body>
 <div class="sidebar">
@@ -62,13 +62,89 @@
         </li>
     </ul>
 </div>
+<!--<div class="card">
+
+<img src="img/prototypBild.jpg" alt="Robot Image">
+<div class="cardContent">
+    <h2>ID</h2>
+    <h2>Name</h2>
+    <button id="toggleButton"><i class="fa-solid fa-plus fa-3x"></i></button>
+</div>
+<div id="extraContent" class="extra-content">
+    <input type="checkbox" id="funktionsfähig" name="funktionsfähig">
+    <label for="funktionsfähig">Funktionsfähig</label><br>
+    <input type="checkbox" id="verfügbar" name="verfügbar">
+    <label for="verfügbar">Verfügbar</label><br>
+    <textarea id="beschreibung" name="beschreibung" rows="4" cols="50">
+            Geben Sie hier eine Beschreibung ein...
+        </textarea>
+    <button>Löschen</button>
+    <button>Speichern</button>
+</div>
+</div> -->
+
+<div id="mainContent">
+    <div id="content" class="card-container"></div>
+    <div class="card add-card" id="addDeviceButton">
+        <div class="cardContent">
+            <i class="fa-solid fa-plus fa-3x"></i>
+            <p>Neues Gerät hinzufügen</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="devicePopup" class="popup">
+
+    <div class="popup-content">
+        <span class="close-popup" id="closePopup">&times;</span>
+        <h2>Neues Gerät hinzufügen</h2>
+        <form id="deviceForm" enctype="multipart/form-data">
+            <label for="deviceName">Gerätename:</label>
+            <input type="text" id="deviceName" name="deviceName" placeholder="Name des Geräts" required><br>
+
+            <label for="deviceType">Gerätetyp:</label>
+            <input type="text" id="deviceType" name="deviceType" placeholder="Typ des Geräts" required><br>
+
+            <label for="deviceDescription">Beschreibung:</label>
+            <textarea id="deviceDescription" name="deviceDescription" rows="3" placeholder="Beschreibung..."></textarea><br>
+
+            <label for="deviceAvailable">Verfügbar:</label>
+            <input type="checkbox" id="deviceAvailable" name="deviceAvailable"><br>
+
+            <label for="deviceDamaged">Beschädigt:</label>
+            <input type="checkbox" id="deviceDamaged" name="deviceDamaged"><br>
+
+            <label for="deviceCamera">Bild hinzufügen:</label>
+            <input type="file" accept="image/*" id="deviceCamera"><br>
+
+            <button type="submit">Hinzufügen</button>
+        </form>
+    </div>
+</div>
+
+
 <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
+    let toggleButton = document.getElementById('toggleButton');
+    let extraContent = document.getElementById('extraContent');
 
     closeBtn.addEventListener("click", ()=>{
         sidebar.classList.toggle("open");
     });
+
+    toggleButton.addEventListener("click", function () {
+        extraContent.classList.toggle("show-content");
+    });
+
+
 </script>
+<script type="module" src="src/dist/devicePopup.js" defer> </script>
+<script type="module" src="src/dist/fetchItems.js" defer> </script>
+<script type="module" src="src/dist/updateItems.js" defer> </script>
+
 </body>
 </html>
