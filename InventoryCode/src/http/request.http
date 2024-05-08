@@ -1,0 +1,37 @@
+@apiUrl=http://localhost:3000/api/items
+
+### Get all items
+GET {{apiUrl}}
+
+### Get item by item number
+GET {{apiUrl}}/1
+
+### Create new item
+POST {{apiUrl}}
+Content-Type: application/json
+
+{
+  "ItemNumber": 2,
+  "ItemName": "Item2",
+  "Description": "This is item 2",
+  "Available": "Y",
+  "Damaged": "N",
+  "Category": "Category2",
+  "Picture": null
+}
+
+### Update item
+PUT {{apiUrl}}/2
+Content-Type: application/json
+
+{
+  "ItemName": "Updated Item2",
+  "Description": "This is updated item 2",
+  "Available": "N",
+  "Damaged": "Y",
+  "Category": "Updated Category2",
+  "Picture": null
+}
+
+### Delete item
+DELETE {{apiUrl}}/2

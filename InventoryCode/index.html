@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/02f4eda956.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="img/HTLLOGO.ico">
     <link rel="stylesheet" href="style/style.css">
-    <script src="src/app.ts"></script>
+
 </head>
 <body>
 <div class="sidebar">
@@ -21,47 +21,97 @@
     </div>
     <ul class="nav-list">
         <li>
-            <a href="">
-                <i class="fa-solid fa-warehouse"></i>
-                <span class="links_name">Alle Geräte</span>
-            </a>
-            <span class="tooltip">Alle Geräte</span>
+            <label for="categoryDropdown">Kategorie:</label>
+            <select id="categoryDropdown" name="categoryDropdown">
+            </select>
         </li>
         <li>
-            <i class='bx bx-search' ></i>
-            <input type="text" id="land-filter" placeholder="Suche...">
-            <span class="tooltip">Suche</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-robot"></i>
-                <span class="links_name">Roboter</span>
-            </a>
-            <span class="tooltip">Roboter</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-gamepad"></i>
-                <span class="links_name">Eingabegeräte</span>
-            </a>
-            <span class="tooltip">Eingabegeräte</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-ethernet"></i>
-                <span class="links_name">Kabel</span>
-            </a>
-            <span class="tooltip">Kabel</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-camera"></i>
-                <span class="links_name">Kameras</span>
-            </a>
-            <span class="tooltip">Kameras</span>
+            <button id="manageCategoriesButton">Kategorien verwalten</button>
         </li>
     </ul>
 </div>
+
+<div id="categoryModal" class="modal">
+    <div class="modal-content">
+
+        <h2>Kategorien verwalten</h2>
+        <form id="categoryForm">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <label for="newCategoryName">Neue Kategorie:</label>
+            <input type="text" id="newCategoryName" name="newCategoryName" placeholder="Neue Kategorie" required><br>
+            <button type="button" id="addCategoryButton">Hinzufügen</button>
+        </form>
+
+        <h3>Vorhandene Kategorien</h3>
+        <ul id="categoryList">
+
+        </ul>
+    </div>
+</div>
+
+<!--<div class="card">
+<img src="img/prototypBild.jpg" alt="Robot Image">
+<div class="cardContent">
+    <h2>ID</h2>
+    <h2>Name</h2>
+    <button id="toggleButton"><i class="fa-solid fa-plus fa-3x"></i></button>
+</div>
+<div id="extraContent" class="extra-content">
+    <input type="checkbox" id="funktionsfähig" name="funktionsfähig">
+    <label for="funktionsfähig">Funktionsfähig</label><br>
+    <input type="checkbox" id="verfügbar" name="verfügbar">
+    <label for="verfügbar">Verfügbar</label><br>
+    <textarea id="beschreibung" name="beschreibung" rows="4" cols="50">
+            Geben Sie hier eine Beschreibung ein...
+        </textarea>
+    <button>Löschen</button>
+    <button>Speichern</button>
+</div>
+</div> -->
+
+<div id="mainContent">
+    <div id="content" class="card-container"></div>
+    <div class="card add-card" id="addDeviceButton">
+        <div class="cardContent">
+            <i class="fa-solid fa-plus fa-3x"></i>
+            <p>Neues Gerät hinzufügen</p>
+        </div>
+    </div>
+</div>
+
+
+<div id="devicePopup" class="popup">
+
+    <div class="popup-content">
+        <span class="close-popup" id="closePopup">&times;</span>
+        <h2>Neues Gerät hinzufügen</h2>
+        <form id="deviceForm" enctype="multipart/form-data">
+            <label for="deviceName">Gerätename:</label>
+            <input type="text" id="deviceName" name="deviceName" placeholder="Name des Geräts" required><br>
+
+            <label for="deviceType">Kategorie:</label>
+            <select id="deviceType" name="deviceType" required>
+                <option value="">Bitte auswählen...</option>
+            </select><br>
+
+            <label for="deviceDescription">Beschreibung:</label>
+            <textarea id="deviceDescription" name="deviceDescription" rows="3" placeholder="Beschreibung..."></textarea><br>
+
+            <label for="deviceAvailable">Verfügbar:</label>
+            <input type="checkbox" id="deviceAvailable" name="deviceAvailable"><br>
+
+            <label for="deviceDamaged">Beschädigt:</label>
+            <input type="checkbox" id="deviceDamaged" name="deviceDamaged"><br>
+
+            <label for="deviceCamera">Bild hinzufügen:</label>
+            <input type="file" accept="image/*" id="deviceCamera"><br>
+
+            <button type="submit">Hinzufügen</button>
+        </form>
+    </div>
+</div>
+
+
 <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
@@ -69,6 +119,12 @@
     closeBtn.addEventListener("click", ()=>{
         sidebar.classList.toggle("open");
     });
+
 </script>
+<script type="module" src="src/dist/ts/devicePopup.js" defer> </script>
+<script type="module" src="src/dist/ts/fetchItems.js" defer> </script>
+<script type="module" src="src/dist/ts/categoryDropdown.js" defer> </script>
+<script type="module" src="src/dist/ts/fetchCategories.js" defer> </script>
+<script type="module" src="src/dist/ts/manageCategories.js" defer> </script>
 </body>
 </html>
