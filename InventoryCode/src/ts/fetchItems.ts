@@ -17,6 +17,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
+        const categoryResponse = await fetch('http://localhost:3000/api/categories', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!categoryResponse.ok) {
+            console.error("Failed to fetch categories from server.");
+            return;
+        }
+
+        const categories = await categoryResponse.json();
+
         const response = await fetch('http://localhost:3000/api/items', {
             method: 'GET',
             headers: {
@@ -55,14 +69,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             const extraContent = document.createElement("div");
             extraContent.classList.add("extra-content");
 
+            const categoryDropdown = document.createElement("select");
+            categoryDropdown.name = `category-${item.ItemID}`;
+            categoryDropdown.id = `category-${item.ItemID}`;
+
+            categories.forEach((category: { name: string | null; }) => {
+                const option = document.createElement("option");
+                if (typeof category.name === "string") {
+                    option.value = category.name;
+                }
+                option.textContent = category.name;
+                if (category.name === item.Category) {
+                    option.selected = true;
+                }
+                categoryDropdown.appendChild(option);
+            });
+
             const isAvailableChecked = (item.Available === 'Y');
             const isDamagedChecked = (item.Damaged === 'Y');
 
-
+            extraContent.appendChild(categoryDropdown);
 
             extraContent.innerHTML = `
-            <input type="text" value="${item.Category}">
-
              <input type="checkbox" id="available-${item.ItemID}" name="available" ${
                 isAvailableChecked ? "checked" : ""
             }>

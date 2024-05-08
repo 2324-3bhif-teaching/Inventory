@@ -3,10 +3,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const devicePopup = document.getElementById("devicePopup");
     const closePopup = document.getElementById("closePopup");
     const deviceForm = document.getElementById("deviceForm");
+    const deviceTypeDropdown = document.getElementById("deviceType");
+
+    const populateCategoryDropdown = async () => {
+        if (deviceTypeDropdown) {
+            deviceTypeDropdown.innerHTML = "";
+
+            try {
+                const response = await fetch('http://localhost:3000/api/categories');
+                if (response.ok) {
+                    const categories = await response.json();
+                    categories.forEach((category: { name: string | null; }) => {
+                        const option = document.createElement("option");
+                        if (typeof category.name === "string") {
+                            option.value = category.name;
+                        }
+                        option.textContent = category.name;
+                        deviceTypeDropdown.appendChild(option);
+                    });
+                } else {
+                    console.error("Error fetching categories");
+                }
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        }
+    };
 
     if (addDeviceButton) {
         addDeviceButton.addEventListener("click", () => {
             if (devicePopup) {
+                populateCategoryDropdown();
                 devicePopup.style.display = "block";
             }
         });

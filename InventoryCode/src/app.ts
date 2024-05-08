@@ -6,6 +6,7 @@
 import express from "express";
 import cors from "cors";
 import { itemRouter } from "./Router/ItemRouter";
+import categoryRouter from './Router/categoryRouter';
 
 // create express application
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.static("./index.html"));
 
 // mount router(s)
 app.use("/api/items", itemRouter);
+app.use('/api/categories', categoryRouter);
 
 // start http server
 app.listen(3000, () => {

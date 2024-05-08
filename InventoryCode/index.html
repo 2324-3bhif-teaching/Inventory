@@ -21,49 +21,35 @@
     </div>
     <ul class="nav-list">
         <li>
-            <a href="">
-                <i class="fa-solid fa-warehouse"></i>
-                <span class="links_name">Alle Geräte</span>
-            </a>
-            <span class="tooltip">Alle Geräte</span>
+            <label for="categoryDropdown">Kategorie:</label>
+            <select id="categoryDropdown" name="categoryDropdown">
+            </select>
         </li>
         <li>
-            <i class='bx bx-search' ></i>
-            <input type="text" id="land-filter" placeholder="Suche...">
-            <span class="tooltip">Suche</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-robot"></i>
-                <span class="links_name">Roboter</span>
-            </a>
-            <span class="tooltip">Roboter</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-gamepad"></i>
-                <span class="links_name">Eingabegeräte</span>
-            </a>
-            <span class="tooltip">Eingabegeräte</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-ethernet"></i>
-                <span class="links_name">Kabel</span>
-            </a>
-            <span class="tooltip">Kabel</span>
-        </li>
-        <li>
-            <a href="">
-                <i class="fa-solid fa-camera"></i>
-                <span class="links_name">Kameras</span>
-            </a>
-            <span class="tooltip">Kameras</span>
+            <button id="manageCategoriesButton">Kategorien verwalten</button>
         </li>
     </ul>
 </div>
-<!--<div class="card">
 
+<div id="categoryModal" class="modal">
+    <div class="modal-content">
+
+        <h2>Kategorien verwalten</h2>
+        <form id="categoryForm">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <label for="newCategoryName">Neue Kategorie:</label>
+            <input type="text" id="newCategoryName" name="newCategoryName" placeholder="Neue Kategorie" required><br>
+            <button type="button" id="addCategoryButton">Hinzufügen</button>
+        </form>
+
+        <h3>Vorhandene Kategorien</h3>
+        <ul id="categoryList">
+
+        </ul>
+    </div>
+</div>
+
+<!--<div class="card">
 <img src="img/prototypBild.jpg" alt="Robot Image">
 <div class="cardContent">
     <h2>ID</h2>
@@ -94,8 +80,6 @@
 </div>
 
 
-
-
 <div id="devicePopup" class="popup">
 
     <div class="popup-content">
@@ -105,8 +89,10 @@
             <label for="deviceName">Gerätename:</label>
             <input type="text" id="deviceName" name="deviceName" placeholder="Name des Geräts" required><br>
 
-            <label for="deviceType">Gerätetyp:</label>
-            <input type="text" id="deviceType" name="deviceType" placeholder="Typ des Geräts" required><br>
+            <label for="deviceType">Kategorie:</label>
+            <select id="deviceType" name="deviceType" required>
+                <option value="">Bitte auswählen...</option>
+            </select><br>
 
             <label for="deviceDescription">Beschreibung:</label>
             <textarea id="deviceDescription" name="deviceDescription" rows="3" placeholder="Beschreibung..."></textarea><br>
@@ -135,7 +121,10 @@
     });
 
 </script>
-<script type="module" src="src/dist/devicePopup.js" defer> </script>
-<script type="module" src="src/dist/fetchItems.js" defer> </script>
+<script type="module" src="src/dist/ts/devicePopup.js" defer> </script>
+<script type="module" src="src/dist/ts/fetchItems.js" defer> </script>
+<script type="module" src="src/dist/ts/categoryDropdown.js" defer> </script>
+<script type="module" src="src/dist/ts/fetchCategories.js" defer> </script>
+<script type="module" src="src/dist/ts/manageCategories.js" defer> </script>
 </body>
 </html>
