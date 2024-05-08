@@ -31,4 +31,33 @@ router.post('/', (req, res) => {
         }
     });
 });
+router.put('/:id', (req, res) => {
+    const categoryId = parseInt(req.params.id, 10);
+    const newCategoryName = req.body.name;
+    if (isNaN(categoryId) || !newCategoryName) {
+        return res.status(400).json({ message: 'Ungültige Kategorie-ID oder kein Name angegeben' });
+    }
+    (0, category_1.updateCategory)(categoryId, newCategoryName, (err) => {
+        if (err) {
+            res.status(500).json({ message: 'Fehler beim Aktualisieren der Kategorie' });
+        }
+        else {
+            res.status(200).json({ message: 'Kategorie erfolgreich aktualisiert' });
+        }
+    });
+});
+router.delete('/:id', (req, res) => {
+    const categoryId = parseInt(req.params.id, 10);
+    if (isNaN(categoryId)) {
+        return res.status(400).json({ message: 'Ungültige Kategorie-ID' });
+    }
+    (0, category_1.deleteCategory)(categoryId, (err) => {
+        if (err) {
+            res.status(500).json({ message: 'Fehler beim Löschen der Kategorie' });
+        }
+        else {
+            res.status(200).json({ message: 'Kategorie erfolgreich gelöscht' });
+        }
+    });
+});
 exports.default = router;

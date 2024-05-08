@@ -27,3 +27,13 @@ export function getCategories(callback: (err: any, categories: any) => void): vo
         }
     });
 }
+
+export function updateCategory(categoryId: number, newName: any, callback: (err: any) => void) {
+    const query = 'UPDATE categories SET name = ? WHERE id = ?';
+    db.run(query, [newName, categoryId], callback);
+}
+
+export function deleteCategory(categoryId: number, callback: (err: any) => void) {
+    const query = 'DELETE FROM categories WHERE id = ?';
+    db.run(query, [categoryId], callback);
+}
