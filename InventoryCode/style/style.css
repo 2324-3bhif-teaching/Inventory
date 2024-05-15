@@ -244,8 +244,8 @@ a{
 }
 
 .card {
+    z-index: 1;
     height: 280px;
-    width: 420px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
@@ -279,6 +279,7 @@ a{
 }
 
 .extra-content {
+    z-index: 5;
     max-height: 0;
     overflow: hidden;
     padding-bottom: 10px;
@@ -294,6 +295,7 @@ a{
 .show-content {
     max-height: 200px;
     display: block;
+    z-index: 5;
 }
 
 .popup {
