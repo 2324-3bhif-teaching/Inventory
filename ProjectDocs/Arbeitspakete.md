@@ -1,6 +1,6 @@
 | Zeitaufwand |                           Arbeitspakete                           |
 |:------------|:-----------------------------------------------------------------:|
-| 10h         |                          Klassendiagramm                          |
+| 2h          |                          Klassendiagramm                          |
 | 2h          |         Aufsetzen Projektstruktur, Github Actions, Docker         |
 | 2h          |               Datenbankdesign und -implementierung                |
 | 3h          |           Benutzeroberfläche Design und Implementierung           |

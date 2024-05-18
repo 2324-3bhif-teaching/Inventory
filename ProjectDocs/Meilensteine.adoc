@@ -14,6 +14,8 @@
 | Durchführung | 08.05.2024 | Geräte können ausgeliehen und zurückgegeben werden (verfügbar / nicht verfügbar)
 | Durchführung | 08.05.2024 | Kategorien können hinzugefügt, bearbeitet und gelöscht werden
 | Durchführung | 15.05.2024 | Geräte können gelöscht und bearbeitet werden
+| Durchführung | 22.05.2024 | Für jedes Gerät kann ein QR-Code generiert werden
+| Durchführung | 22.05.2024 | Geräte können nach QR-Code gescannt werden
 | Durchführung | 29.05.2024 | Frontend fertiggestellt
 | Durchführung | 05.06.2024 | Styling und Erstellung Login
 | Durchführung | 19.06.2024 | Testphase abgeschlossen
