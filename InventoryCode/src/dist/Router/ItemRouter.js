@@ -13,11 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.itemRouter = void 0;
-// import modules
 const express_1 = __importDefault(require("express"));
 const http_status_codes_1 = require("http-status-codes");
 const data_1 = require("../data/data");
-// create router
 exports.itemRouter = express_1.default.Router();
 exports.itemRouter.get('/', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -48,21 +46,26 @@ exports.itemRouter.put('/:itemId', (req, res) => __awaiter(void 0, void 0, void 
     try {
         const db = yield data_1.DB.createDBConnection();
         const itemId = parseInt(req.params.itemId, 10);
-        const { itemName, description, category, available, damaged, picture, } = req.body;
-        yield db.run(`
-            UPDATE Item 
-            SET ItemName = ?, 
-                Description = ?, 
-                Category = ?, 
-                Available = ?, 
-                Damaged = ?, 
-                Picture = ? 
-            WHERE ItemNumber = ?`, [itemName, description, category, available, damaged, picture, itemId]);
+        const { itemName, description, category, available, damaged, picture } = req.body;
+        yield db.run(`UPDATE Item SET ItemName = ?, Description = ?, Category = ?, Available = ?, Damaged = ?, Picture = ? WHERE ItemNumber = ?`, [itemName, description, category, available, damaged, picture, itemId]);
         yield db.close();
         res.status(http_status_codes_1.StatusCodes.OK).send("Item updated successfully.");
     }
     catch (error) {
         console.error("Error updating item:", error);
         res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send("Error updating item.");
+    }
+}));
+exports.itemRouter.delete('/:itemId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const db = yield data_1.DB.createDBConnection();
+        const itemId = parseInt(req.params.itemId, 10);
+        yield db.run(`DELETE FROM Item WHERE ItemNumber = ?`, [itemId]);
+        yield db.close();
+        res.status(http_status_codes_1.StatusCodes.OK).send("Item deleted successfully.");
+    }
+    catch (error) {
+        console.error("Error deleting item:", error);
+        res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send("Error deleting item.");
     }
 }));
