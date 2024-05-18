@@ -9,8 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import modules
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const ItemRouter_1 = require("../Router/ItemRouter");
-const categoryRouter_1 = __importDefault(require("../Router/categoryRouter"));
+const ItemRouter_1 = require("./Router/ItemRouter");
+const categoryRouter_1 = __importDefault(require("./Router/categoryRouter"));
 // create express application
 const app = (0, express_1.default)();
 // mount middleware

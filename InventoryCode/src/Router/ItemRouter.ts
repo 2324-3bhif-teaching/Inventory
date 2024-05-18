@@ -1,6 +1,6 @@
 import express from "express";
 import { StatusCodes } from "http-status-codes";
-import { DB } from "../data/data";
+import { DB } from "../data/items";
 
 export const itemRouter = express.Router();
 

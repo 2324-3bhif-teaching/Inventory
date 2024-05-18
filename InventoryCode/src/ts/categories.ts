@@ -1,29 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
     const categoryDropdown = document.getElementById("categoryDropdown");
 
-        fetchCategoriesAndUpdateDropdown();
+    fetchCategoriesAndUpdateDropdown();
 
-        async function fetchCategoriesAndUpdateDropdown() {
-            try {
-                const response = await fetch('http://localhost:3000/api/categories');
-                if (!response.ok) throw new Error("Failed to fetch categories");
-                const categories = await response.json();
+    async function fetchCategoriesAndUpdateDropdown() {
+        try {
+            const response = await fetch('http://localhost:3000/api/categories');
+            if (!response.ok) throw new Error("Failed to fetch categories");
+            const categories = await response.json();
 
-                if(categoryDropdown) {
-                    categoryDropdown.innerHTML = "";
-                    categories.forEach((category: { name: string | null; }) => {
-                        const option = document.createElement("option");
-                        if (typeof category.name === "string") {
-                            option.value = category.name;
-                        }
-                        option.textContent = category.name;
-                        categoryDropdown.appendChild(option);
-                    });
-                }
-            } catch (err) {
-                console.error("Error fetching categories:", err);
+            if(categoryDropdown) {
+                categoryDropdown.innerHTML = "";
+                categories.forEach((category: { name: string | null; }) => {
+                    const option = document.createElement("option");
+                    if (typeof category.name === "string") {
+                        option.value = category.name;
+                    }
+                    option.textContent = category.name;
+                    categoryDropdown.appendChild(option);
+                });
             }
+        } catch (err) {
+            console.error("Error fetching categories:", err);
         }
+    }
 
     const manageCategoriesButton = document.getElementById("manageCategoriesButton");
     const categoryModal = document.getElementById("categoryModal");
@@ -74,24 +74,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 const categories = await response.json();
 
                 if(categoryList){
-                categoryList.innerHTML = "";
-                categories.forEach((category: { name: string | null; }) => {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = category.name;
+                    categoryList.innerHTML = "";
+                    categories.forEach((category: { name: string | null; }) => {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = category.name;
 
-                    const editButton = document.createElement("button");
-                    editButton.textContent = "Bearbeiten";
-                    editButton.addEventListener("click", () => editCategory(category));
+                        const editButton = document.createElement("button");
+                        editButton.textContent = "Bearbeiten";
+                        editButton.addEventListener("click", () => editCategory(category));
 
-                    const deleteButton = document.createElement("button");
-                    deleteButton.textContent = "Löschen";
-                    deleteButton.addEventListener("click", () => deleteCategory(category));
+                        const deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Löschen";
+                        deleteButton.addEventListener("click", () => deleteCategory(category));
 
-                    listItem.appendChild(editButton);
-                    listItem.appendChild(deleteButton);
-                    categoryList.appendChild(listItem);
+                        listItem.appendChild(editButton);
+                        listItem.appendChild(deleteButton);
+                        categoryList.appendChild(listItem);
 
-                });
+                    });
                 }
             } catch (err) {
                 console.error("Error fetching categories:", err);

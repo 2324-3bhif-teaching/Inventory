@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.itemRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const http_status_codes_1 = require("http-status-codes");
-const data_1 = require("../data/data");
+const items_1 = require("../data/items");
 exports.itemRouter = express_1.default.Router();
 exports.itemRouter.get('/', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const db = yield data_1.DB.createDBConnection();
+        const db = yield items_1.DB.createDBConnection();
         const allItems = yield db.all('SELECT * FROM Item');
         yield db.close();
         res.status(http_status_codes_1.StatusCodes.OK).json(allItems);
@@ -31,7 +31,7 @@ exports.itemRouter.get('/', (_, res) => __awaiter(void 0, void 0, void 0, functi
 }));
 exports.itemRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const db = yield data_1.DB.createDBConnection();
+        const db = yield items_1.DB.createDBConnection();
         const { itemName, description, category, available, damaged, picture } = req.body;
         yield db.run(`INSERT INTO Item (ItemName, Description, Category, Available, Damaged, Picture) VALUES (?, ?, ?, ?, ?, ?)`, [itemName, description, category, available, damaged, picture]);
         yield db.close();
@@ -44,7 +44,7 @@ exports.itemRouter.post('/', (req, res) => __awaiter(void 0, void 0, void 0, fun
 }));
 exports.itemRouter.put('/:itemId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const db = yield data_1.DB.createDBConnection();
+        const db = yield items_1.DB.createDBConnection();
         const itemId = parseInt(req.params.itemId, 10);
         const { itemName, description, category, available, damaged, picture } = req.body;
         yield db.run(`UPDATE Item SET ItemName = ?, Description = ?, Category = ?, Available = ?, Damaged = ?, Picture = ? WHERE ItemNumber = ?`, [itemName, description, category, available, damaged, picture, itemId]);
@@ -58,7 +58,7 @@ exports.itemRouter.put('/:itemId', (req, res) => __awaiter(void 0, void 0, void 
 }));
 exports.itemRouter.delete('/:itemId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const db = yield data_1.DB.createDBConnection();
+        const db = yield items_1.DB.createDBConnection();
         const itemId = parseInt(req.params.itemId, 10);
         yield db.run(`DELETE FROM Item WHERE ItemNumber = ?`, [itemId]);
         yield db.close();
