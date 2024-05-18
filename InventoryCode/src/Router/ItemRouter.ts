@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import { DB } from "../data/items";
 
 // create router
-export const itemRouter = express.Router();
+const itemRouter = express.Router();
 
 itemRouter.get('/', async (_, res) => {
     try {
@@ -32,4 +32,6 @@ itemRouter.post('/', async (req, res) => {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error.");
     }
 });
+
+export default itemRouter;
 
