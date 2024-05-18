@@ -1,9 +1,7 @@
-// import modules
 import express from "express";
 import { StatusCodes } from "http-status-codes";
 import { DB } from "../data/items";
 
-// create router
 export const itemRouter = express.Router();
 
 itemRouter.get('/', async (_, res) => {
@@ -22,7 +20,7 @@ itemRouter.get('/', async (_, res) => {
 itemRouter.post('/', async (req, res) => {
     try {
         const db = await DB.createDBConnection();
-        const {itemName, description, category, available, damaged, picture} = req.body;
+        const { itemName, description, category, available, damaged, picture } = req.body;
         await db.run(`INSERT INTO Item (ItemName, Description, Category, Available, Damaged, Picture) VALUES (?, ?, ?, ?, ?, ?)`, [itemName, description, category, available, damaged, picture]);
         await db.close();
 
@@ -33,3 +31,45 @@ itemRouter.post('/', async (req, res) => {
     }
 });
 
+interface ItemUpdatePayload {
+    itemName: string;
+    description?: string;
+    category?: string;
+    available: 'Y' | 'N';
+    damaged: 'Y' | 'N';
+    picture?: Buffer;
+}
+
+itemRouter.put('/:itemId', async (req, res) => {
+    try {
+        const db = await DB.createDBConnection();
+        const itemId = parseInt(req.params.itemId, 10);
+        const { itemName, description, category, available, damaged, picture }: ItemUpdatePayload = req.body;
+
+        await db.run(
+            `UPDATE Item SET ItemName = ?, Description = ?, Category = ?, Available = ?, Damaged = ?, Picture = ? WHERE ItemNumber = ?`,
+            [itemName, description, category, available, damaged, picture, itemId]
+        );
+
+        await db.close();
+        res.status(StatusCodes.OK).send("Item updated successfully.");
+    } catch (error) {
+        console.error("Error updating item:", error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error updating item.");
+    }
+});
+
+itemRouter.delete('/:itemId', async (req, res) => {
+    try {
+        const db = await DB.createDBConnection();
+        const itemId = parseInt(req.params.itemId, 10);
+
+        await db.run(`DELETE FROM Item WHERE ItemNumber = ?`, [itemId]);
+
+        await db.close();
+        res.status(StatusCodes.OK).send("Item deleted successfully.");
+    } catch (error) {
+        console.error("Error deleting item:", error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error deleting item.");
+    }
+});

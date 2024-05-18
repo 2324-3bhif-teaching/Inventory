@@ -14,29 +14,32 @@
 
 </head>
 <body>
-<div class="sidebar">
-    <div class="logo-details">
-        <a href="index.html"><img id="logo" src="img/HTL-Leonding-Logo.png" alt="Logo HTL"></a>
-        <i class="fa-solid fa-bars" id="btn"></i>
-    </div>
-    <ul class="nav-list">
-        <li>
-            <label for="categoryDropdown">Kategorie:</label>
-            <select id="categoryDropdown" name="categoryDropdown">
-            </select>
-        </li>
-        <li>
-            <button id="manageCategoriesButton">Kategorien verwalten</button>
-        </li>
-    </ul>
-</div>
+<button id="addDeviceButton" ><i class="fa-solid fa-plus"></i></button>
 
+<div id="filterButton"><i class="fa-solid fa-filter"></i></div>
+<div id="filterFenster">
+    <div id="schliessenButton">&times;</div>
+    <div id="filterSeiten">
+        <div class="filterSeite">
+            <ul>
+                <li>
+                    <label for="categoryDropdown">Kategorie:</label>
+                    <select id="categoryDropdown" name="categoryDropdown">
+                    </select>
+                </li>
+                <li>
+                    <button id="manageCategoriesButton">Kategorien verwalten</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div id="categoryModal" class="modal">
     <div class="modal-content">
 
         <h2>Kategorien verwalten</h2>
         <form id="categoryForm">
-            <span class="close-modal" id="closeModal">&times;</span>
+            <div id="closeModal" class="close-modal">&times;</div>
             <label for="newCategoryName">Neue Kategorie:</label>
             <input type="text" id="newCategoryName" name="newCategoryName" placeholder="Neue Kategorie" required><br>
             <button type="button" id="addCategoryButton">Hinzufügen</button>
@@ -70,20 +73,15 @@
 </div> -->
 
 <div id="mainContent">
-    <div id="content" class="card-container"></div>
-    <div class="card add-card" id="addDeviceButton">
-        <div class="cardContent">
-            <i class="fa-solid fa-plus fa-3x"></i>
-            <p>Neues Gerät hinzufügen</p>
-        </div>
+    <div id="content" class="card-container">
     </div>
 </div>
 
 
-<div id="devicePopup" class="popup">
 
+<div id="devicePopup" class="popup">
     <div class="popup-content">
-        <span class="close-popup" id="closePopup">&times;</span>
+        <div id="closePopup" class="close-popup">&times;</div>
         <h2>Neues Gerät hinzufügen</h2>
         <form id="deviceForm" enctype="multipart/form-data">
             <label for="deviceName">Gerätename:</label>
@@ -111,20 +109,56 @@
     </div>
 </div>
 
+<div id="editPopup" class="popup">
+    <div class="popup-content">
+        <div id="closeEditPopup" class="close-popup">&times;</div>
+        <h2>Artikel bearbeiten</h2>
+        <form id="editForm">
+            <input type="hidden" id="editItemNumber">
+
+            <label for="editItemName">Artikelname:</label>
+            <input type="text" id="editItemName" name="itemName" placeholder="Name des Artikels" required><br>
+
+            <label for="editCategory">Kategorie:</label>
+            <select id="editCategory" name="category" required></select><br>
+
+            <label for="editDescription">Beschreibung:</label>
+            <textarea id="editDescription" name="description" rows="3" placeholder="Beschreibung..."></textarea><br>
+
+            <label for="editAvailable">Verfügbar:</label>
+            <input type="checkbox" id="editAvailable" name="available"><br>
+
+            <label for="editDamaged">Beschädigt:</label>
+            <input type="checkbox" id="editDamaged" name="damaged"><br>
+
+            <button type="submit">Speichern</button>
+        </form>
+    </div>
+</div>
+
 
 <script>
-    let sidebar = document.querySelector(".sidebar");
-    let closeBtn = document.querySelector("#btn");
+    document.getElementById("filterButton").addEventListener("click", function() {
+        let filterButton = document.getElementById("filterButton");
+        let filterFenster = document.getElementById("filterFenster");
 
-    closeBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("open");
+        if (filterFenster.style.display === "block") {
+            filterFenster.classList.remove("show");
+            filterButton.classList.remove("hidden");
+        } else {
+            filterFenster.classList.add("show");
+            filterButton.classList.add("hidden");
+        }
     });
 
+    document.getElementById("schliessenButton").addEventListener("click", function() {
+        let kontaktButton = document.getElementById("filterButton");
+        let kontaktFenster = document.getElementById("filterFenster");
+        kontaktFenster.classList.remove("show");
+        kontaktButton.classList.remove("hidden");
+    });
 </script>
-<script type="module" src="src/dist/ts/devicePopup.js" defer> </script>
-<script type="module" src="src/dist/ts/fetchItems.js" defer> </script>
-<script type="module" src="src/dist/ts/categoryDropdown.js" defer> </script>
-<script type="module" src="src/dist/ts/fetchCategories.js" defer> </script>
-<script type="module" src="src/dist/ts/manageCategories.js" defer> </script>
+<script type="module" src="src/dist/ts/items.js" defer> </script>
+<script type="module" src="src/dist/ts/categories.js" defer> </script>
 </body>
 </html>
