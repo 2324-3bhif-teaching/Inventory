@@ -37,7 +37,7 @@ interface ItemUpdatePayload {
     category?: string;
     available: 'Y' | 'N';
     damaged: 'Y' | 'N';
-    picture?: Buffer;
+    picture?: string
 }
 
 itemRouter.put('/:itemId', async (req, res) => {
