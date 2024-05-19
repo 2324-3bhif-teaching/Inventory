@@ -9,7 +9,7 @@ export class DB {
             filename: `./${dbFileName}`,
             driver: Driver
         });
-		await db.run('PRAGMA foreign_keys = ON');
+        await db.run('PRAGMA foreign_keys = ON');
 
         await DB.ensureTablesCreated(db);
 
@@ -31,14 +31,14 @@ export class DB {
     private static async ensureTablesCreated(connection: Database): Promise<void> {
         await connection.run(`
         CREATE TABLE IF NOT EXISTS Item (
-            ItemNumber INTEGER PRIMARY KEY AUTOINCREMENT,
-            ItemName VARCHAR2(15) NOT NULL,
-            Description VARCHAR2(100),
-            Available VARCHAR2(1) DEFAULT 'Y',
-            Damaged VARCHAR2(1) DEFAULT 'N',
-            Category VARCHAR2(15),
-            Picture BLOB
-        )
+        ItemNumber INTEGER PRIMARY KEY AUTOINCREMENT,
+        ItemName VARCHAR2(15) NOT NULL,
+        Description VARCHAR2(100),
+        Available VARCHAR2(1) DEFAULT 'Y',
+        Damaged VARCHAR2(1) DEFAULT 'N',
+        Category VARCHAR2(15),
+        Picture BLOB
+        );
     `);
     }
 }
