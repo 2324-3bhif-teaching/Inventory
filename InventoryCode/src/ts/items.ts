@@ -5,6 +5,7 @@ interface Item {
     Category: string;
     Available: string;
     Damaged: string;
+    imagePath: string;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -23,6 +24,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const editDescription = document.getElementById("editDescription") as HTMLTextAreaElement;
     const editAvailable = document.getElementById("editAvailable") as HTMLInputElement;
     const editDamaged = document.getElementById("editDamaged") as HTMLInputElement;
+    const categoryDropdown = document.getElementById("categoryDropdown") as HTMLSelectElement
+
+    function getSelectedCategory() {
+        return categoryDropdown ? categoryDropdown.value : "all";
+    }
+
+    function setSelectedCategory(category: any) {
+        if (categoryDropdown) {
+            categoryDropdown.value = category;
+        }
+    }
 
 
     if (contentContainer && addDeviceButton && devicePopup && closePopup && deviceForm && deviceTypeDropdown) {
@@ -38,28 +50,38 @@ document.addEventListener("DOMContentLoaded", async () => {
                 items.forEach((item: any) => {
                     const card = document.createElement("div");
                     card.classList.add("card");
+                    card.id = `item_${item.ItemNumber}`;
+
+                    const image = document.createElement("img");
+                    image.src = "src/img/prototypBild.jpg";
+                    image.alt = "Robot Image";
+                    card.appendChild(image);
 
                     const cardContent = document.createElement("div");
                     cardContent.classList.add("cardContent");
 
                     cardContent.innerHTML = `
-                <h2>${item.ItemNumber}</h2>
-                <h3>${item.ItemName}</h3>
-                <button class="toggle-details"><i class="fa-solid fa-chevron-down"></i></button>
-            `;
-
+                    <h2>${item.ItemNumber}</h2>
+                    <h3>${item.ItemName}</h3>
+                    <button class="toggle-details"><i class="fa-solid fa-chevron-down"></i></button>`;
                     card.appendChild(cardContent);
+
+                    const buttonAndQRContent = document.createElement("div");
+                    buttonAndQRContent.classList.add("buttonAndQRContent-content");
+                    buttonAndQRContent.innerHTML = `
+                    <img id="QRCode" src="https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/index.html#item_${item.ItemNumber}&size=100x100" alt="QR-Code">`;
+                    card.appendChild(buttonAndQRContent);
 
                     const extraContent = document.createElement("div");
                     extraContent.classList.add("extra-content");
 
                     extraContent.innerHTML = `
-                <p>Kategorie: ${item.Category}</p>
-                <p>Beschreibung: ${item.Description}</p>
-                <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
-                <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
-                <button class="editButton">Bearbeiten</button>
-                <button class="deleteButton">Löschen</button>`;
+                    <p>Kategorie: ${item.Category}</p>
+                    <p>Beschreibung: ${item.Description}</p>
+                    <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
+                    <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
+                    <button class="editButton">Bearbeiten</button>
+                    <button class="deleteButton">Löschen</button>`;
 
                     card.appendChild(extraContent);
 
@@ -86,40 +108,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         };
 
-        const openEditPopup = (item: Item) => {
-            populateEditForm(item);
-            editPopup.style.display = "block";
-            editPopup.style.display = "block";
-        };
-
-        const closeEditPopup = () => {
-            editPopup.style.display = "none";
-        };
-
-        const deleteItem = async (itemNumber: number) => {
-            try {
-                const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                if (response.ok) {
-                    alert("Item deleted successfully.");
-                    await fetchItemsAndUpdateList();
-                } else {
-                    console.error("Failed to delete item.");
-                }
-            } catch (error) {
-                console.error("Error deleting item:", error);
-            }
-        };
-
         const populateCategoryDropdown = async () => {
             if (deviceTypeDropdown) {
                 deviceTypeDropdown.innerHTML = "";
-
                 try {
                     const response = await fetch('http://localhost:3000/api/categories');
                     if (response.ok) {
@@ -177,6 +168,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     picture: null,
                 };
 
+                const selectedCategory = getSelectedCategory();
+
                 const response = await fetch('http://localhost:3000/api/items', {
                     method: 'POST',
                     headers: {
@@ -188,8 +181,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (response.ok) {
                     alert("Gerät erfolgreich hinzugefügt!");
 
-                    await fetchItemsAndUpdateList();
-
                     (document.getElementById("deviceName") as HTMLInputElement).value = '';
                     (document.getElementById("deviceType") as HTMLInputElement).value = '';
                     (document.getElementById("deviceDescription") as HTMLInputElement).value = '';
@@ -199,6 +190,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     if (devicePopup) {
                         devicePopup.style.display = "none";
                     }
+
+                    setSelectedCategory(selectedCategory);
+                    await fetchItemsAndUpdateList();
+                    await filterItemsByCategory();
                 } else {
                     alert("Fehler beim Hinzufügen des Geräts.");
                 }
@@ -207,268 +202,222 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             });
         }
-    }
 
-    const fetchItemsAndUpdateList = async () => {
-        try {
+        const populateEditForm = (item: Item) => {
+            editItemNumber.value = item.ItemNumber.toString();
+            editItemName.value = item.ItemName;
+            editCategory.value = item.Category;
+            editDescription.value = item.Description;
+            editAvailable.checked = item.Available === 'Y';
+            editDamaged.checked = item.Damaged === 'Y';
+        };
 
-            if (!contentContainer) {
-                console.error("Content container not found in DOM.");
-                return;
-            }
+        const openEditPopup = (item: Item) => {
+            populateEditForm(item);
+            editPopup.style.display = "block";
+            editPopup.style.display = "block";
+        };
 
-            const itemsResponse = await fetch('http://localhost:3000/api/items');
-            if (!itemsResponse.ok) throw new Error("Failed to fetch items");
-            const items = await itemsResponse.json();
+        const closeEditPopup = () => {
+            editPopup.style.display = "none";
+        };
 
-            contentContainer.innerHTML = "";
-
-            items.forEach((item: any) => {
-                const card = document.createElement("div");
-                card.classList.add("card");
-
-                const cardContent = document.createElement("div");
-                cardContent.classList.add("cardContent");
-
-                cardContent.innerHTML = `
-                <h2>${item.ItemNumber}</h2>
-                <h3>${item.ItemName}</h3>
-                <button class="toggle-details"><i class="fa-solid fa-chevron-down"></i></button>
-            `;
-
-                card.appendChild(cardContent);
-
-                const extraContent = document.createElement("div");
-                extraContent.classList.add("extra-content");
-
-                extraContent.innerHTML = `
-                <p>Kategorie: ${item.Category}</p>
-                <p>Beschreibung: ${item.Description}</p>
-                <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
-                <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
-                <button class="editButton">Bearbeiten</button>
-                <button class="deleteButton">Löschen</button>`;
-
-                card.appendChild(extraContent);
-
-                cardContent.querySelector(".toggle-details")?.addEventListener("click", () => {
-                    extraContent.classList.toggle("show-content");
+        const deleteItem = async (itemNumber: number) => {
+            try {
+                const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 });
 
-                extraContent.querySelector(".editButton")?.addEventListener("click", () => {
-                    openEditPopup(item);
-                });
+                const selectedCategory = getSelectedCategory();
 
-                extraContent.querySelector(".deleteButton")?.addEventListener("click", async () => {
-                    const confirmDelete = confirm("Sind Sie sicher, dass Sie diesen Artikel löschen möchten?");
-                    if (confirmDelete) {
-                        await deleteItem(item.ItemNumber);
-                        await fetchItemsAndUpdateList();
-                    }
-                });
-
-                contentContainer.appendChild(card);
-            });
-        } catch (error) {
-            console.error("Error fetching and updating items:", error);
-        }
-    };
-
-    const populateEditForm = (item: Item) => {
-        editItemNumber.value = item.ItemNumber.toString();
-        editItemName.value = item.ItemName;
-        editCategory.value = item.Category;
-        editDescription.value = item.Description;
-        editAvailable.checked = item.Available === 'Y';
-        editDamaged.checked = item.Damaged === 'Y';
-    };
-
-    const openEditPopup = (item: Item) => {
-        populateEditForm(item);
-        editPopup.style.display = "block";
-        editPopup.style.display = "block";
-    };
-
-    const closeEditPopup = () => {
-        editPopup.style.display = "none";
-    };
-
-    const deleteItem = async (itemNumber: number) => {
-        try {
-            const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                alert("Item deleted successfully.");
-                await fetchItemsAndUpdateList();
-            } else {
-                console.error("Failed to delete item.");
+                if (response.ok) {
+                    alert("Item deleted successfully.");
+                    await fetchItemsAndUpdateList();
+                    setSelectedCategory(selectedCategory);
+                    await filterItemsByCategory();
+                } else {
+                    console.error("Failed to delete item.");
+                }
+            } catch (error) {
+                console.error("Error deleting item:", error);
             }
-        } catch (error) {
-            console.error("Error deleting item:", error);
-        }
-    };
+        };
 
-    if (!contentContainer || !editPopup || !closeEPopup || !editForm || !editItemNumber || !editItemName || !editCategory || !editDescription || !editAvailable || !editDamaged) {
-        console.error("Some elements are missing in the DOM.");
-        return;
-    }
-
-    const fetchCategories = async () => {
-        try {
-            const categoryResponse = await fetch('http://localhost:3000/api/categories', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (!categoryResponse.ok) {
-                console.error("Failed to fetch categories from server.");
-                return [];
-            }
-
-            return await categoryResponse.json();
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-            return [];
-        }
-    };
-
-    const fetchItems = async () => {
-        try {
-            const response = await fetch('http://localhost:3000/api/items', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                console.error("Failed to fetch items from server.");
-                return [];
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching items:", error);
-            return [];
-        }
-    };
-
-
-    const saveItem = async (event: Event) => {
-        event.preventDefault();
-
-        const confirmSave = confirm("Möchten Sie die Änderungen wirklich speichern?");
-        if (!confirmSave) {
+        if (!contentContainer || !editPopup || !closeEPopup || !editForm || !editItemNumber || !editItemName || !editCategory || !editDescription || !editAvailable || !editDamaged) {
+            console.error("Some elements are missing in the DOM.");
             return;
         }
 
-        try {
-            const itemNumber = parseInt(editItemNumber.value, 10);
-            const itemName = editItemName.value;
-            const category = editCategory.value;
-            const available = editAvailable.checked ? 'Y' : 'N';
-            const damaged = editDamaged.checked ? 'Y' : 'N';
-            const description = editDescription.value;
+        const fetchCategories = async () => {
+            try {
+                const categoryResponse = await fetch('http://localhost:3000/api/categories', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-            const payload = {
-                itemName,
-                description,
-                category,
-                available,
-                damaged,
-            };
+                if (!categoryResponse.ok) {
+                    console.error("Failed to fetch categories from server.");
+                    return [];
+                }
 
-            const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
+                return await categoryResponse.json();
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+                return [];
+            }
+        };
 
-            if (response.ok) {
-                alert("Item saved successfully.");
-                await fetchItemsAndUpdateList();
+        const saveItem = async (event: Event) => {
+            event.preventDefault();
+
+            const confirmSave = confirm("Möchten Sie die Änderungen wirklich speichern?");
+            if (!confirmSave) {
+                return;
+            }
+
+            try {
+                const itemNumber = parseInt(editItemNumber.value, 10);
+                const itemName = editItemName.value;
+                const category = editCategory.value;
+                const available = editAvailable.checked ? 'Y' : 'N';
+                const damaged = editDamaged.checked ? 'Y' : 'N';
+                const description = editDescription.value;
+
+                const payload = {
+                    itemName,
+                    description,
+                    category,
+                    available,
+                    damaged,
+                };
+
+                const selectedCategory = getSelectedCategory();
+
+                const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    alert("Item saved successfully.");
+                    await fetchItemsAndUpdateList();
+                    setSelectedCategory(selectedCategory);
+                    await filterItemsByCategory();
+                    closeEditPopup();
+                } else {
+                    console.error("Failed to save item.");
+                }
+            } catch (error) {
+                console.error("Error saving item:", error);
+            }
+        };
+
+
+        closeEPopup.addEventListener("click", closeEditPopup);
+        editForm.addEventListener("submit", saveItem);
+
+        window.addEventListener("click", (event) => {
+            if (event.target === editPopup) {
                 closeEditPopup();
-            } else {
-                console.error("Failed to save item.");
-            }
-        } catch (error) {
-            console.error("Error saving item:", error);
-        }
-    };
-
-
-    closeEPopup.addEventListener("click", closeEditPopup);
-    editForm.addEventListener("submit", saveItem);
-
-    window.addEventListener("click", (event) => {
-        if (event.target === editPopup) {
-            closeEditPopup();
-        }
-    });
-
-    const categories = await fetchCategories();
-
-    categories.forEach((category: { name: string }) => {
-        const option = document.createElement("option");
-        option.value = category.name;
-        option.textContent = category.name;
-        editCategory.appendChild(option);
-    });
-
-    const items = await fetchItems();
-
-    items.forEach((item: any) => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        const cardContent = document.createElement("div");
-        cardContent.classList.add("cardContent");
-
-        cardContent.innerHTML = `
-            <h2>${item.ItemNumber}</h2>
-            <h3>${item.ItemName}</h3>
-            <button class="toggle-details"><i class="fa-solid fa-chevron-down"></i></button>
-        `;
-
-        card.appendChild(cardContent);
-
-        const extraContent = document.createElement("div");
-        extraContent.classList.add("extra-content");
-
-        extraContent.innerHTML = `
-            <p>Kategorie: ${item.Category}</p>
-            <p>Beschreibung: ${item.Description}</p>
-            <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
-            <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
-            <button class="editButton">Bearbeiten</button>
-            <button class="deleteButton">Löschen</button>`;
-
-        card.appendChild(extraContent);
-
-        cardContent.querySelector(".toggle-details")?.addEventListener("click", () => {
-            extraContent.classList.toggle("show-content");
-        });
-
-        extraContent.querySelector(".editButton")?.addEventListener("click", () => {
-            openEditPopup(item);
-        });
-
-        extraContent.querySelector(".deleteButton")?.addEventListener("click", async () => {
-            const confirmDelete = confirm("Sind Sie sicher, dass Sie diesen Artikel löschen möchten?");
-            if (confirmDelete) {
-                await deleteItem(item.ItemNumber);
             }
         });
 
-        contentContainer.appendChild(card);
-    });
+        const categories = await fetchCategories();
+
+        categories.forEach((category: { name: string }) => {
+            const option = document.createElement("option");
+            option.value = category.name;
+            option.textContent = category.name;
+            editCategory.appendChild(option);
+        });
+
+
+        const filterItemsByCategory = async () => {
+            const selectedCategory = categoryDropdown.value;
+            try {
+                const itemsResponse = await fetch('http://localhost:3000/api/items');
+                if (!itemsResponse.ok) throw new Error("Failed to fetch items");
+                const items = await itemsResponse.json();
+
+                contentContainer.innerHTML = "";
+
+                items.forEach((item: any) => {
+                    if (selectedCategory === "all" || item.Category === selectedCategory) {
+                        const card = document.createElement("div");
+                        card.classList.add("card");
+
+                        const image = document.createElement("img");
+                        image.src = "src/img/prototypBild.jpg";
+                        image.alt = "Robot Image";
+                        card.appendChild(image);
+
+                        const cardContent = document.createElement("div");
+                        cardContent.classList.add("cardContent");
+
+                        cardContent.innerHTML = `
+                    <h2>${item.ItemNumber}</h2>
+                    <h3>${item.ItemName}</h3>
+                    <button class="toggle-details"><i class="fa-solid fa-chevron-down"></i></button>
+                        `;
+
+                        card.appendChild(cardContent);
+
+                        const buttonAndQRContent = document.createElement("div");
+                        buttonAndQRContent.classList.add("buttonAndQRContent-content");
+                        buttonAndQRContent.innerHTML = `
+                        <img id="QRCode" src="https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/index.html#item_${item.ItemNumber}&size=100x100" alt="QR-Code">`;
+                        card.appendChild(buttonAndQRContent);
+
+                        const extraContent = document.createElement("div");
+                        extraContent.classList.add("extra-content");
+
+                        extraContent.innerHTML = `
+                    <p>Kategorie: ${item.Category}</p>
+                    <p>Beschreibung: ${item.Description}</p>
+                    <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
+                    <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
+                    <button class="editButton">Bearbeiten</button>
+                    <button class="deleteButton">Löschen</button>
+                     `;
+
+                        card.appendChild(extraContent);
+
+                        cardContent.querySelector(".toggle-details")?.addEventListener("click", () => {
+                            extraContent.classList.toggle("show-content");
+                        });
+
+                        extraContent.querySelector(".editButton")?.addEventListener("click", () => {
+                            openEditPopup(item);
+                        });
+
+                        extraContent.querySelector(".deleteButton")?.addEventListener("click", async () => {
+                            const confirmDelete = confirm("Sind Sie sicher, dass Sie diesen Artikel löschen möchten?");
+                            if (confirmDelete) {
+                                await deleteItem(item.ItemNumber);
+                                await fetchItemsAndUpdateList();
+                            }
+                        });
+
+                        contentContainer.appendChild(card);
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching and updating items:", error);
+            }
+        };
+
+        if (categoryDropdown && contentContainer) {
+            categoryDropdown.addEventListener("change", filterItemsByCategory);
+        }
+
+        await fetchItemsAndUpdateList();
+    }
 });

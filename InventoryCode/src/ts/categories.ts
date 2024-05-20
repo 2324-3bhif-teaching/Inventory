@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const categoryDropdown = document.getElementById("categoryDropdown");
+    const categoryDropdown = document.getElementById("categoryDropdown") as HTMLSelectElement;
 
     fetchCategoriesAndUpdateDropdown();
 
@@ -9,8 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) throw new Error("Failed to fetch categories");
             const categories = await response.json();
 
-            if(categoryDropdown) {
+            if (categoryDropdown) {
                 categoryDropdown.innerHTML = "";
+                const allOption = document.createElement("option");
+                allOption.value = "all";
+                allOption.textContent = "Alle";
+                categoryDropdown.appendChild(allOption);
+
                 categories.forEach((category: { name: string | null; }) => {
                     const option = document.createElement("option");
                     if (typeof category.name === "string") {
@@ -24,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching categories:", err);
         }
     }
+
 
     const manageCategoriesButton = document.getElementById("manageCategoriesButton");
     const categoryModal = document.getElementById("categoryModal");
@@ -136,4 +142,5 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
+
 });
