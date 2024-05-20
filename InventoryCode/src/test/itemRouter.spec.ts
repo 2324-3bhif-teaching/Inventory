@@ -9,10 +9,8 @@ app.use(express.json());
 app.use(itemRouter);
 
 
-
-
 describe('Confirmation account routes', () => {
-    it('should return all categories', async () => {
+    it('should return all items', async () => {
         const res = await request(app).get('/');
         expect(res.status).toBe(200);
     })
@@ -45,7 +43,7 @@ describe('Confirmation account routes', () => {
         const res = await request(app).put('/test').send({ name: 'test' });
         expect(res.status).toBe(400);
     })
-    it('should return an error if the category id is missing', async () => {
+    it('should return an error if the item id is missing', async () => {
         const res = await request(app).delete('/').send({ name: 'test' });
         expect(res.status).toBe(404);
     })
