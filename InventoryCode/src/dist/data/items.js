@@ -50,7 +50,7 @@ class DB {
             Available VARCHAR2(1) DEFAULT 'Y',
             Damaged VARCHAR2(1) DEFAULT 'N',
             Category VARCHAR2(15),
-            Picture BLOB
+            Picture VARCHAR2(100)
         )
     `);
         });

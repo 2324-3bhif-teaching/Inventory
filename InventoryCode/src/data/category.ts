@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import { ErrorCallback, GetCategoriesCallback, Category } from '../ts/types';
+import { Category } from '../ts/types';
 
 export const db = new sqlite3.Database('category.db');
 

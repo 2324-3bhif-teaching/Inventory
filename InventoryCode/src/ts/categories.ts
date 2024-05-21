@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(categoryDropdown) {
                 categoryDropdown.innerHTML = "";
+                const allOption = document.createElement("option");
+                allOption.value = "all";
+                allOption.textContent = "Alle";
+                categoryDropdown.appendChild(allOption);
+
                 categories.forEach((category: { name: string | null; }) => {
                     const option = document.createElement("option");
                     if (typeof category.name === "string") {

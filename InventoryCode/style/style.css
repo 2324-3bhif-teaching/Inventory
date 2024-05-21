@@ -147,7 +147,7 @@ h1{
 }
 
 .card {
-    height: 280px;
+    height: 298px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
@@ -162,13 +162,33 @@ h1{
 }
 
 .cardContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-bottom: 10px;
     border-bottom: 1px solid black;
 }
 
-.cardContent button i{
+#QRCode {
+    width: 70px;
+    height: 70px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-radius: 0;
+}
+
+.cardContent h2 {
+    margin: 0;
+}
+
+.cardContent button {
+    margin-top: auto;
+}
+
+.cardContent button i {
     font-size: 20px;
 }
+
 
 .extra-content {
     max-height: 0;
