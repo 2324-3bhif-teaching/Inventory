@@ -35,9 +35,9 @@
         </div>
     </div>
 </div>
+
 <div id="categoryModal" class="modal">
     <div class="modal-content">
-
         <h2>Kategorien verwalten</h2>
         <form id="categoryForm">
             <div id="closeModal" class="close-modal">&times;</div>
@@ -53,34 +53,32 @@
     </div>
 </div>
 
-<!--<div class="card">
-<img src="img/prototypBild.jpg" alt="Robot Image">
-<div class="cardContent">
-    <h2>ID</h2>
-    <h2>Name</h2>
-    <button id="toggleButton"><i class="fa-solid fa-plus fa-3x"></i></button>
-</div>
-<div id="extraContent" class="extra-content">
-    <input type="checkbox" id="funktionsfähig" name="funktionsfähig">
-    <label for="funktionsfähig">Funktionsfähig</label><br>
-    <input type="checkbox" id="verfügbar" name="verfügbar">
-    <label for="verfügbar">Verfügbar</label><br>
-    <textarea id="beschreibung" name="beschreibung" rows="4" cols="50">
-            Geben Sie hier eine Beschreibung ein...
-        </textarea>
-    <button>Löschen</button>
-    <button>Speichern</button>
-</div>
-</div> -->
-
 <div id="mainContent">
-    <div id="content" class="card-container">
-    </div>
+    <div id="content" class="card-container"> </div>
+
 </div>
 
+<!--<div class="card">
+    <img src="src/img/prototypBild.jpg" alt="Robot Image">
+    <div class="cardContent">
+        <h2>ID</h2>
+        <h2>Name</h2>
+        <button id="toggleButton"><i class="fa-solid fa-plus fa-3x"></i></button>
+    </div>
+    <div id="extraContent" class="extra-content">
+        <input type="checkbox" id="funktionsfähig" name="funktionsfähig">
+        <label for="funktionsfähig">Funktionsfähig</label><br>
+        <input type="checkbox" id="verfügbar" name="verfügbar">
+        <label for="verfügbar">Verfügbar</label><br>
+        <textarea id="beschreibung" name="beschreibung" rows="4" cols="50">
+        Geben Sie hier eine Beschreibung ein...
+    </textarea>
+        <button>Löschen</button>
+        <button>Speichern</button>
+    </div>
+</div>-->
 
-
-<div id="devicePopup" class="popup">
+<div id="devicePopup" class="popup" >
     <div class="popup-content">
         <div id="closePopup" class="close-popup">&times;</div>
         <h2>Neues Gerät hinzufügen</h2>
@@ -102,13 +100,14 @@
             <label for="deviceDamaged">Beschädigt:</label>
             <input type="checkbox" id="deviceDamaged" name="deviceDamaged"><br>
 
-            <label for="deviceCamera">Bild hinzufügen:</label>
-            <input type="file" accept="image/*" id="deviceCamera"><br>
+            <label for='files'>Bild hinzufügen:</label>
+            <input id='files' type="file" accept="image/*">
 
             <button type="submit">Hinzufügen</button>
         </form>
     </div>
 </div>
+
 
 <div id="editPopup" class="popup">
     <div class="popup-content">
@@ -137,6 +136,17 @@
     </div>
 </div>
 
+<div id="QRPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" id="QRCloseButton">&times;</span>
+        <img id="qrCodeImage" src="" alt="QR-Code">
+        <div>
+            <label for="qrCodeSize">QR-Code Größe (in Pixel 30-500px):</label>
+            <input type="number" id="qrCodeSize" name="qrCodeSize" min="30" max="500">
+        </div>
+        <button id="printButton">Drucken</button>
+    </div>
+</div>
 
 <script>
     document.getElementById("filterButton").addEventListener("click", function() {
@@ -158,6 +168,7 @@
         kontaktFenster.classList.remove("show");
         kontaktButton.classList.remove("hidden");
     });
+
 </script>
 <script type="module" src="src/dist/ts/items.js" defer> </script>
 <script type="module" src="src/dist/ts/categories.js" defer> </script>

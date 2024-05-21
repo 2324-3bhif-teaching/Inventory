@@ -47,9 +47,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 contentContainer.innerHTML = "";
 
-                items.forEach((item: any) => {
+                items.forEach((item:any) => {
                     const card = document.createElement("div");
                     card.classList.add("card");
+                    card.classList.add(item.ItemNumber);
                     card.id = `item_${item.ItemNumber}`;
 
                     const image = document.createElement("img");
@@ -61,33 +62,25 @@ document.addEventListener("DOMContentLoaded", async () => {
                     cardContent.classList.add("cardContent");
 
                     cardContent.innerHTML = `
-                    <h2>${item.ItemNumber}</h2>
-                    <h3>${item.ItemName}</h3>
-                    <button class="toggle-details"><i class="fa-solid fa-chevron-down"></i></button>`;
+                        <h2>${item.ItemNumber}</h2>
+                         <h3>${item.ItemName}</h3>`;
                     card.appendChild(cardContent);
 
-                    const buttonAndQRContent = document.createElement("div");
-                    buttonAndQRContent.classList.add("buttonAndQRContent-content");
-                    buttonAndQRContent.innerHTML = `
-                    <img id="QRCode" src="https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/index.html#item_${item.ItemNumber}&size=100x100" alt="QR-Code">`;
-                    card.appendChild(buttonAndQRContent);
+
 
                     const extraContent = document.createElement("div");
                     extraContent.classList.add("extra-content");
 
                     extraContent.innerHTML = `
-                    <p>Kategorie: ${item.Category}</p>
-                    <p>Beschreibung: ${item.Description}</p>
-                    <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
-                    <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
-                    <button class="editButton">Bearbeiten</button>
-                    <button class="deleteButton">Löschen</button>`;
-
+                        <p>Kategorie: ${item.Category}</p>
+                        <p>Beschreibung: ${item.Description}</p>
+                        <p>Verfügbar: ${item.Available === 'Y' ? "Ja" : "Nein"}</p>
+                        <p>Beschädigt: ${item.Damaged === 'Y' ? "Ja" : "Nein"}</p>
+                        <button class="editButton">Bearbeiten</button>
+                        <button class="deleteButton">Löschen</button>
+                        <button class = "qrButton"> QR - Code anzeigen </button>
+  `;
                     card.appendChild(extraContent);
-
-                    cardContent.querySelector(".toggle-details")?.addEventListener("click", () => {
-                        extraContent.classList.toggle("show-content");
-                    });
 
                     extraContent.querySelector(".editButton")?.addEventListener("click", () => {
                         openEditPopup(item);
@@ -101,8 +94,44 @@ document.addEventListener("DOMContentLoaded", async () => {
                         }
                     });
 
+                    const qrButton = extraContent.querySelector(".qrButton") as HTMLButtonElement;
+                    qrButton.addEventListener("click", () => {
+                        showQRCode(item);
+                    });
+
                     contentContainer.appendChild(card);
                 });
+
+                function showQRCode(item: any) {
+                    const popup = document.getElementById("QRPopup") as HTMLDivElement;
+                    const qrCodeImage = document.getElementById("qrCodeImage") as HTMLImageElement;
+                    const closeButton = document.getElementById("QRCloseButton") as HTMLSpanElement;
+                    const printButton = document.getElementById("printButton") as HTMLButtonElement;
+                    const qrCodeSizeInput = document.getElementById("qrCodeSize") as HTMLInputElement;
+
+
+                    qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/index.html#item_${item.ItemNumber}&size=100x100`;
+                    popup.style.display = "block";
+
+                    closeButton.addEventListener("click", () => {
+                        popup.style.display = "none";
+                    });
+
+                    printButton.addEventListener("click", () => {
+                        printQRCode(qrCodeImage, qrCodeSizeInput.value);
+                    });
+                }
+
+                function printQRCode(qrCodeImage : any, qrCodeSize: any ) {
+                    const printWindow = window.open("", "_blank")!;
+                    printWindow.document.write(`<img src="${qrCodeImage.src}" style="width:${qrCodeSize}px; height:${qrCodeSize}px;">`);
+                    printWindow.document.close();
+                    printWindow.onload = function () {
+                        printWindow.print();
+                        printWindow.close();
+                    };
+                }
+
             } catch (error) {
                 console.error("Error fetching and updating items:", error);
             }

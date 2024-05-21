@@ -21,23 +21,23 @@ describe('Confirmation account routes', () => {
         const res = await request(app).put('/1').send({ name: 'test' });
         expect(res.status).toBe(200);
     })
-    it('should delete an item', async () => {
+    it('should delete an category', async () => {
         const res = await request(app).delete('/1');
         expect(res.status).toBe(200);
     })
-    it('should return an error if the item name is missing', async () => {
+    it('should return an error if the category name is missing', async () => {
         const res = await request(app).post('/').send({});
         expect(res.status).toBe(400);
     })
-    it('should return an error if the item id is missing', async () => {
+    it('should return an error if the category id is missing', async () => {
         const res = await request(app).put('/').send({ name: 'test' });
         expect(res.status).toBe(400);
     })
-    it('should return an error if the item id is invalid', async () => {
+    it('should return an error if the category id is invalid', async () => {
         const res = await request(app).put('/test').send({ name: 'test' });
         expect(res.status).toBe(400);
     })
-    it('should return an error if the item name is missing', async () => {
+    it('should return an error if the category name is missing', async () => {
         const res = await request(app).put('/1').send({});
         expect(res.status).toBe(400);
     })
