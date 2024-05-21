@@ -23,7 +23,6 @@ describe('Confirmation account routes', () => {
         const res = await request(app).post('/').send({ ItemName: 'test', Description: 'test', Category: 'test', Available: 'Y', Damaged: 'N', Picture: 'test' });
         expect(res.status).toBe(201);
     })
-
     it('should delete an item', async () => {
         const res = await request(app).delete('/1');
         expect(res.status).toBe(200);
