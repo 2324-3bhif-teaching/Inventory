@@ -51,11 +51,16 @@ itemRouter.post('/', async (req, res) => {
     try {
         const db = await DB.createDBConnection();
         const { itemName, description, category, available, damaged, picture } = req.body;
+        if(!itemName){
+            res.status(StatusCodes.BAD_REQUEST).send("Item name is required.");
+            return;
+        }
         await db.run(`INSERT INTO Item (ItemName, Description, Category, Available, Damaged, Picture) VALUES (?, ?, ?, ?, ?, ?)`, [itemName, description, category, available, damaged, picture]);
         await db.close();
 
         res.status(StatusCodes.CREATED).send("Item added.");
     } catch (error) {
+        console.log(req.body, error)
         console.error("error adding item:", error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error.");
     }
@@ -75,6 +80,11 @@ itemRouter.put('/:itemId', async (req, res) => {
         const db = await DB.createDBConnection();
         const itemId = parseInt(req.params.itemId, 10);
         const { itemName, description, category, available, damaged, picture }: ItemUpdatePayload = req.body;
+
+        if(isNaN(itemId) || itemId < 0 || itemId.toString().length === 0){
+            res.status(StatusCodes.BAD_REQUEST).send("Invalid item id.");
+            return;
+        }
 
         await db.run(
             `UPDATE Item SET ItemName = ?, Description = ?, Category = ?, Available = ?, Damaged = ?, Picture = ? WHERE ItemNumber = ?`,
