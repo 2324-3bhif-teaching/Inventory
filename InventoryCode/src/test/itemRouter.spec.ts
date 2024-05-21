@@ -44,4 +44,5 @@ describe('Confirmation account routes', () => {
         const res = await request(app).delete('/').send({ name: 'test' });
         expect(res.status).toBe(404);
     })
+
 });

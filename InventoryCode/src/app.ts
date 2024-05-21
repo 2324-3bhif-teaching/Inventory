@@ -5,7 +5,7 @@
 // import modules
 import express from "express";
 import cors from "cors";
-import {itemRouter} from "./Router/ItemRouter";
+import  {itemRouter} from "./Router/ItemRouter";
 import categoryRouter from './Router/categoryRouter';
 
 // create express application
