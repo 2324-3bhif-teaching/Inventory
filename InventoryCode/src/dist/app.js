@@ -9,16 +9,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // import modules
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const ItemRouter_1 = require("./Router/ItemRouter");
+const ItemRouter_1 = __importDefault(require("./Router/ItemRouter"));
 const categoryRouter_1 = __importDefault(require("./Router/categoryRouter"));
 // create express application
 const app = (0, express_1.default)();
 // mount middleware
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use(express_1.default.static("./index.html"));
+app.use(express_1.default.static("../"));
 // mount router(s)
-app.use("/api/items", ItemRouter_1.itemRouter);
+app.use("/api/items", ItemRouter_1.default);
 app.use('/api/categories', categoryRouter_1.default);
 // start http server
 app.listen(3000, () => {
