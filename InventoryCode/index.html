@@ -9,11 +9,12 @@
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.css"/>
     <script src="https://kit.fontawesome.com/02f4eda956.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="img/HTLLOGO.ico">
+    <link rel="shortcut icon" href="src/img/HTLLOGO.ico">
     <link rel="stylesheet" href="style/style.css">
 
 </head>
 <body>
+
 <button id="addDeviceButton" ><i class="fa-solid fa-plus"></i></button>
 
 <div id="filterButton"><i class="fa-solid fa-filter"></i></div>
@@ -34,9 +35,9 @@
         </div>
     </div>
 </div>
+
 <div id="categoryModal" class="modal">
     <div class="modal-content">
-
         <h2>Kategorien verwalten</h2>
         <form id="categoryForm">
             <div id="closeModal" class="close-modal">&times;</div>
@@ -52,32 +53,30 @@
     </div>
 </div>
 
-<!--<div class="card">
-<img src="img/prototypBild.jpg" alt="Robot Image">
-<div class="cardContent">
-    <h2>ID</h2>
-    <h2>Name</h2>
-    <button id="toggleButton"><i class="fa-solid fa-plus fa-3x"></i></button>
+<div id="mainContent">
+    <div id="content" class="card-container"> </div>
+
 </div>
-<div id="extraContent" class="extra-content">
-    <input type="checkbox" id="funktionsfähig" name="funktionsfähig">
-    <label for="funktionsfähig">Funktionsfähig</label><br>
-    <input type="checkbox" id="verfügbar" name="verfügbar">
-    <label for="verfügbar">Verfügbar</label><br>
-    <textarea id="beschreibung" name="beschreibung" rows="4" cols="50">
+
+    <!--<div class="card">
+        <img src="src/img/prototypBild.jpg" alt="Robot Image">
+        <div class="cardContent">
+            <h2>ID</h2>
+            <h2>Name</h2>
+            <button id="toggleButton"><i class="fa-solid fa-plus fa-3x"></i></button>
+        </div>
+        <div id="extraContent" class="extra-content">
+            <input type="checkbox" id="funktionsfähig" name="funktionsfähig">
+            <label for="funktionsfähig">Funktionsfähig</label><br>
+            <input type="checkbox" id="verfügbar" name="verfügbar">
+            <label for="verfügbar">Verfügbar</label><br>
+            <textarea id="beschreibung" name="beschreibung" rows="4" cols="50">
             Geben Sie hier eine Beschreibung ein...
         </textarea>
-    <button>Löschen</button>
-    <button>Speichern</button>
-</div>
-</div> -->
-
-<div id="mainContent">
-    <div id="content" class="card-container">
-    </div>
-</div>
-
-
+            <button>Löschen</button>
+            <button>Speichern</button>
+        </div>
+    </div>-->
 
 <div id="devicePopup" class="popup">
     <div class="popup-content">
@@ -102,7 +101,7 @@
             <input type="checkbox" id="deviceDamaged" name="deviceDamaged"><br>
 
             <label for="deviceImage">Bild hinzufügen:</label>
-            <input type="file" accept="image/*" id="deviceImage" name="image"><br> <!-- Änderung hier -->
+            <input type="file" accept="image/*" id="deviceImage" name="image"><br>
 
             <button type="submit">Hinzufügen</button>
         </form>

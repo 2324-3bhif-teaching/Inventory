@@ -4,6 +4,15 @@ import { DB } from "../data/items";
 
 export const itemRouter = express.Router();
 
+async function getItemById(itemId: number): Promise<ItemUpdatePayload> {
+    const db = await DB.createDBConnection();
+    const item = await db.get('SELECT * FROM Item WHERE ItemNumber = ?', [itemId]);
+    await db.close();
+
+    return item;
+
+}
+
 itemRouter.get('/', async (_, res) => {
     try {
         const db = await DB.createDBConnection();
@@ -13,6 +22,27 @@ itemRouter.get('/', async (_, res) => {
         res.status(StatusCodes.OK).json(allItems);
     } catch (error) {
         console.error("error getting items:", error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error.");
+    }
+});
+
+itemRouter.get('/:itemId', async (req, res) => {
+    try{
+        const id = parseInt(req.params.itemId, 10);
+        if(isNaN(id) || id < 0 || id.toString().length === 0){
+            res.status(StatusCodes.BAD_REQUEST).send("Invalid item id.");
+            return;
+        }
+        const item = getItemById(id);
+
+        if(!item){
+            res.status(StatusCodes.NOT_FOUND).send("Item not found.");
+            return;
+        }
+        res.status(StatusCodes.OK).json(item);
+
+    }catch(error){
+        console.error("error getting item by id:", error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error.");
     }
 });

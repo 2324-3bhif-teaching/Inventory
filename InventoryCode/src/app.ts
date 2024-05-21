@@ -5,7 +5,7 @@
 // import modules
 import express from "express";
 import cors from "cors";
-import  itemRouter from "./Router/ItemRouter";
+import {itemRouter} from "./Router/ItemRouter";
 import categoryRouter from './Router/categoryRouter';
 
 // create express application
@@ -14,7 +14,7 @@ const app = express();
 // mount middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static("./index.html"));
+app.use(express.static("../"));
 
 // mount router(s)
 app.use("/api/items", itemRouter);
