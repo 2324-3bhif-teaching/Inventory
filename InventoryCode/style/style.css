@@ -147,7 +147,7 @@ h1{
 }
 
 .card {
-    height: 320px;
+    height: 298px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
@@ -170,8 +170,8 @@ h1{
 }
 
 #QRCode {
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     margin-top: 2px;
     margin-bottom: 2px;
     border-radius: 0;
