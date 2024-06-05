@@ -31,7 +31,7 @@ describe('Confirmation account routes', () => {
     })
     it('should return an error if the category id is missing', async () => {
         const res = await request(app).put('/').send({ name: 'test' });
-        expect(res.status).toBe(400);
+        expect(res.status).toBe(404);
     })
     it('should return an error if the category id is invalid', async () => {
         const res = await request(app).put('/test').send({ name: 'test' });

@@ -1,12 +1,16 @@
 import { Database as Driver} from 'sqlite3';
 import { open, Database } from 'sqlite';
+import path from "node:path";
 
 export const dbFileName = 'items.db';
 
 export class DB {
     public static async createDBConnection(): Promise<Database> {
+
+        const isDevelopment = process.env.NODE_ENV !== 'production';
+        const basePath = isDevelopment ? __dirname : path.join(__dirname, '../../src');
         const db = await open({
-            filename: `./${dbFileName}`,
+            filename: path.join(basePath, `../data/${dbFileName}`),
             driver: Driver
         });
 		await db.run('PRAGMA foreign_keys = ON');

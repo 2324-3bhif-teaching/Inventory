@@ -1,7 +1,11 @@
 import sqlite3 from 'sqlite3';
-import { Category } from '../ts/types';
+import { Category } from './types';
+import path from "node:path";
+import {dbFileName} from "./items";
 
-export const db = new sqlite3.Database('category.db');
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const basePath = isDevelopment ? __dirname : path.join(__dirname, '../../src');
+export const db = new sqlite3.Database(path.join(basePath, `../data/${dbFileName}`));
 
 db.serialize(() => {
     db.run(`
