@@ -1,6 +1,8 @@
 import request from 'supertest';
 import express from 'express';
 import router from '../Router/categoryRouter';
+import fetchMock from 'jest-fetch-mock';
+fetchMock.enableMocks();
 
 const app = express();
 app.use(express.json());
@@ -13,9 +15,32 @@ describe('Confirmation account routes', () => {
         expect(res.status).toBe(200);
     })
     it('should add a category', async () => {
-        const res = await request(app).post('/').send({ name: 'test' });
+        const newCategory = {
+            name: 'Test Category'
+        };
+
+        fetchMock.mockResponseOnce(JSON.stringify(newCategory), { status: 201 });
+
+        const res = await fetch('http://localhost:3000/api/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCategory),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCategory),
+        });
+
         expect(res.status).toBe(201);
-    })
+        const data = await res.json();
+        expect(data).toEqual(newCategory);
+    });
     it('should update an category', async () => {
         const res = await request(app).put('/1').send({ name: 'test' });
         expect(res.status).toBe(200);

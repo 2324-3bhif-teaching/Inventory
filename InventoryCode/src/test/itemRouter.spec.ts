@@ -1,13 +1,12 @@
 import request from 'supertest';
 import express from 'express';
 import {itemRouter} from '../Router/ItemRouter';
+import fetchMock from 'jest-fetch-mock';
+fetchMock.enableMocks();
 
 const app = express();
 app.use(express.json());
 app.use(itemRouter);
-import fetchMock from 'jest-fetch-mock';
-
-fetchMock.enableMocks();
 
 describe('Confirmation account routes', () => {
     it('should return all items', async () => {

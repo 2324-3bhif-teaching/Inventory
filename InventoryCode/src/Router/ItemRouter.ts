@@ -92,7 +92,6 @@ itemRouter.put('/:itemId', async (req, res) => {
         );
 
         await db.close();
-        console.log(itemName + " " + description + " " + category + " " + available + " " + damaged + " " + picture);
         res.status(StatusCodes.OK).send("Item updated successfully.");
     } catch (error) {
         console.error("Error updating item:", error);
