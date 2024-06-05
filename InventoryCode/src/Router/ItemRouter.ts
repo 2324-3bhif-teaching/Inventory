@@ -51,8 +51,8 @@ itemRouter.post('/', async (req, res) => {
     try {
         const db = await DB.createDBConnection();
         const { itemName, description, category, available, damaged, picture } = req.body;
-        if(!itemName){
-            res.status(StatusCodes.BAD_REQUEST).send("Item name is required.");
+        if(itemName == null){
+            res.status(StatusCodes.BAD_REQUEST).send("Item name is required. "+ itemName + " " + description + " " + category + " " + available + " " + damaged + " " + picture);
             return;
         }
         await db.run(`INSERT INTO Item (ItemName, Description, Category, Available, Damaged, Picture) VALUES (?, ?, ?, ?, ?, ?)`, [itemName, description, category, available, damaged, picture]);
@@ -92,6 +92,7 @@ itemRouter.put('/:itemId', async (req, res) => {
         );
 
         await db.close();
+        console.log(itemName + " " + description + " " + category + " " + available + " " + damaged + " " + picture);
         res.status(StatusCodes.OK).send("Item updated successfully.");
     } catch (error) {
         console.error("Error updating item:", error);
