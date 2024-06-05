@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const categories = yield response.json();
                 if (categoryDropdown) {
                     categoryDropdown.innerHTML = "";
+                    const allOption = document.createElement("option");
+                    allOption.value = "all";
+                    allOption.textContent = "Alle";
+                    categoryDropdown.appendChild(allOption);
                     categories.forEach((category) => {
                         const option = document.createElement("option");
                         if (typeof category.name === "string") {

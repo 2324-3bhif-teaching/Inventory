@@ -1,0 +1,19 @@
+services:
+    web:
+        build: ./InventoryCode/
+        ports:
+        - "3000:3000"
+        volumes:
+        - sqlite-data:/app/data
+        depends_on:
+        - sqlite
+
+    sqlite:
+      container_name: my-sqlite-container
+      image: nouchka/sqlite3:latest
+      volumes:
+        - sqlite-data:/db
+      restart: always
+
+volumes:
+  sqlite-data:

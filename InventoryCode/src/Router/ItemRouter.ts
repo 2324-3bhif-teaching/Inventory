@@ -68,8 +68,8 @@ itemRouter.post('/', async (req, res) => {
 
 interface ItemUpdatePayload {
     itemName: string;
-    description?: string;
-    category?: string;
+    description: string;
+    category: string;
     available: 'Y' | 'N';
     damaged: 'Y' | 'N';
     picture?: string

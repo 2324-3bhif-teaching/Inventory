@@ -1,6 +1,6 @@
 import express from 'express';
 import { addCategory, getCategories, deleteCategory, updateCategory } from '../data/category';
-import { Request, Response } from '../ts/types';
+import { Request, Response } from '../data/types';
 
 const router = express.Router();
 
