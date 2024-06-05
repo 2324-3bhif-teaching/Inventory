@@ -7,17 +7,15 @@
 }
 
 :root {
-    --primary: rgb(29, 27, 49);
     --primary2: rgb(17, 16, 29);
     --text-2: #d7d7d7;
-    --text-3: #5ed2c6;
     --white: #fff;
     --navBackgroundDropdwn: #1a1c21;
     --background: #20232a;
     --text1: #d7d7d7;
     --shadow-03: 0 5px 5px rgba(0, 0, 0, 0.3);
     --shadow-05: 0 5px 5px rgba(0, 0, 0, 0.5);
-    --transition-300: all 300ms ease-in-out;
+    --transition-2: all 2s ease-in-out;
     --transition-500: all 500ms ease-in-out;
 }
 
@@ -178,7 +176,6 @@ h1{
     justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid black;
     margin-top: 10px;
 }
 
@@ -228,12 +225,124 @@ h1{
     z-index: 3;
     position: relative;
     width: 100%;
+    border: 1px solid black;
     box-sizing: border-box;
 }
 
 .show-content {
     max-height: 300px;
     display: block;
+}
+
+.extra-content .editButton,
+.extra-content .deleteButton,
+.extra-content .qrButton {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 5px 0 0;
+    font-size: 1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.extra-content .editButton {
+    background-color: #6c757d;
+}
+
+.extra-content .editButton:hover {
+    background-color: #5a6268;
+}
+
+.extra-content .deleteButton {
+    background-color: #dc3545;
+}
+
+.extra-content .deleteButton:hover {
+    background-color: #c82333;
+}
+
+
+.extra-content .qrButton {
+    background-color: #4b4b4b;
+}
+
+.extra-content .qrButton:hover {
+    background-color: #333333;
+}
+
+.extra-content .editButton:active,
+.extra-content .deleteButton:active,
+.extra-content .qrButton:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 1200px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+
+    .cardContent {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cardContent h2 {
+        font-size: 1rem;
+    }
+
+    .cardContent h3 {
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .cardContent button {
+        padding: 10px;
+    }
+
+    .cardContent button i {
+        font-size: 1.25rem;
+    }
+
+    #QRCode {
+        width: 60px;
+        height: 60px;
+        margin-top: 10px;
+    }
+
+    .extra-content {
+        padding: 10px;
+    }
+
+    .extra-content .editButton,
+    .extra-content .deleteButton,
+    .extra-content .qrButton {
+        padding: 8px 12px;
+        font-size: 0.875rem;
+        margin: 8px 4px 0 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .extra-content .editButton,
+    .extra-content .deleteButton,
+    .extra-content .qrButton {
+        width: 100%;
+    }
 }
 
 .popup {
@@ -259,7 +368,7 @@ h1{
     max-width: 500px;
     width: 80%;
     text-align: center;
-    animation: fadeIn 0.3s;
+    animation: fadeIn 0.3s ease-in-out;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -328,7 +437,7 @@ h1{
 
 #QRPopup .popup-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -352,6 +461,63 @@ h1{
     margin: 5px;
 }
 
+#searchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+    background-color: var(--background);
+    border-radius: 30px;
+    box-shadow: var(--shadow-03);
+}
+
+#searchInput {
+    width: calc(100% - 85px);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px 0 0 30px;
+    font-size: 1rem;
+    background-color: var(--text1);
+    color: var(--background);
+    outline: none;
+}
+
+#searchInput::placeholder {
+    color: var(--background);
+}
+
+#searchButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 30px 30px 0;
+    background-color: var(--background);
+    color: var(--text1);
+    cursor: pointer;
+}
+
+#searchButton i {
+    font-size: 1.2rem;
+    transition: ease-in-out 0.3s;
+}
+
+#cancelSearchButton {
+    padding: 10px 15px;
+    border-radius: 30px;
+    background-color: var(--background);
+    color: var(--text1);
+    cursor: pointer;
+}
+
+#searchButton i:hover, #cancelSearchButton i:hover {
+    scale: 1.15;
+}
+
+#cancelSearchButton i {
+    font-size: 1.2rem;
+    transition: ease-in-out 0.3s;
+}
 
 .modal {
     display: none;
@@ -376,7 +542,7 @@ h1{
     max-width: 500px;
     width: 80%;
     text-align: center;
-    animation: fadeIn 0.3s;
+    animation: fadeIn 0.3s ease-in-out;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -397,7 +563,18 @@ h1{
     right: 10px;
     font-size: 50px;
     cursor: pointer;
-    color : red;
+    color: red;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
 }
 
 .modal .close-modal:hover {
