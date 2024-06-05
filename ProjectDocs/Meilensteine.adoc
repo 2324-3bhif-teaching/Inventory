@@ -1,11 +1,11 @@
 |=== 
-| Phase         | Soll-Termin | Ergebnisse                                                                       |
-| Initiierung   | 20.03.2024  | Vollständigkeit der Projektdokumente                                             |
-| Planung       | 03.04.2024  | Festlegung der Projektziele, -struktur und -organisation                         |
-| Durchführung  | 17.04.2024  | Projektstruktur fertig aufgesetzt                                                |
-| Durchführung  | 24.04.2024  | Infrastruktur (Datenbank und Server) aufgesetzt                                  |
-| Durchführung  | 12.06.2024  | Backend abgeschlossen                                                            |
-| Durchführung  | 12.06.2024  | Frontend abgeschlossen                                                           |
-| Durchführung  | 15.06.2024  | Styling und Login-Erstellung                                                     |
-| Durchführung  | 19.06.2024  | Testphase abgeschlossen                                                          |
+| Phase         | Soll-Termin | Ergebnisse                                                                       
+| Initiierung   | 20.03.2024  | Vollständigkeit der Projektdokumente                                             
+| Planung       | 03.04.2024  | Festlegung der Projektziele, -struktur und -organisation                         
+| Durchführung  | 17.04.2024  | Projektstruktur fertig aufgesetzt                                                
+| Durchführung  | 24.04.2024  | Infrastruktur (Datenbank und Server) aufgesetzt                                  
+| Durchführung  | 12.06.2024  | Backend abgeschlossen                                                            
+| Durchführung  | 12.06.2024  | Frontend abgeschlossen                                                           
+| Durchführung  | 15.06.2024  | Styling und Login-Erstellung                                                     
+| Durchführung  | 19.06.2024  | Testphase abgeschlossen                                                          
 |===
