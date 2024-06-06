@@ -2,7 +2,7 @@
 import type {Config} from '@jest/types';
 
 const config: Config.InitialOptions = {
-    roots: ['<rootDir>/src/test'],
+    roots: ['<rootDir>/test'],
     testMatch: [
         "**/__tests__/**/*.+(ts|tsx|js)",
         "**/?(*.)+(spec|test).+(ts|tsx|js)",
@@ -14,6 +14,7 @@ const config: Config.InitialOptions = {
     collectCoverage: true,
     coverageDirectory: "coverage",
     coverageProvider: "v8",
+    maxWorkers: 1,
 };
 
 export default config;

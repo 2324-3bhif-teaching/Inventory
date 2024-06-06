@@ -9,7 +9,7 @@ import  {itemRouter} from "./Router/ItemRouter";
 import categoryRouter from './Router/categoryRouter';
 
 // create express application
-const app = express();
+export const app = express();
 
 // mount middleware
 app.use(cors());
