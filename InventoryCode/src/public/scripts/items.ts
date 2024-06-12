@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.id = `item_${item.ItemNumber}`;
 
         const image = document.createElement("img");
-        image.src = "../src/img/prototypBild.png";
+        image.src = "../img/prototypBild.png";
         image.alt = "Robot Image";
         card.appendChild(image);
 

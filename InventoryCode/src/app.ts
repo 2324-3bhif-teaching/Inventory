@@ -14,7 +14,7 @@ export const app = express();
 // mount middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static("../"));
+app.use(express.static("./public/"));
 
 // mount router(s)
 app.use("/api/items", itemRouter);
