@@ -1,44 +1,190 @@
-import request from 'supertest';
-import express from 'express';
-import router from '../Router/categoryRouter';
-import * as categoryModule from '../data/category';
-
-const app = express();
-app.use(express.json());
-app.use(router);
-
+import fetchMock from 'jest-fetch-mock';
+fetchMock.enableMocks();
 
 describe('Confirmation account routes', () => {
-    it('should return all items', async () => {
-        const res = await request(app).get('/');
-        expect(res.status).toBe(200);
-    })
-    it('should add a item', async () => {
-        const res = await request(app).post('/').send({ name: 'test' });
-        expect(res.status).toBe(201);
-    })
-    it('should update an item', async () => {
-        const res = await request(app).put('/1').send({ name: 'test' });
-        expect(res.status).toBe(200);
-    })
-    it('should delete an category', async () => {
-        const res = await request(app).delete('/1');
-        expect(res.status).toBe(200);
-    })
+    afterEach(() => {
+        fetchMock.resetMocks();
+    });
+
+    it('should return all categories', async () => {
+        const categories = [{ id: 1, name: 'Category 1' }, { id: 2, name: 'Category 2' }];
+        fetchMock.mockResponseOnce(JSON.stringify(categories), { status: 200 });
+
+        const response = await fetch('http://localhost:3000/api/categories', {
+            method: 'GET',
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories', {
+            method: 'GET',
+        });
+
+        expect(response.status).toBe(200);
+        const data = await response.json();
+        expect(data).toEqual(categories);
+    });
+
+    it('should add a category', async () => {
+        const newCategory = {
+            name: 'Test Category'
+        };
+
+        fetchMock.mockResponseOnce(JSON.stringify(newCategory), { status: 201 });
+
+        const response = await fetch('http://localhost:3000/api/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCategory),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newCategory),
+        });
+
+        expect(response.status).toBe(201);
+        const data = await response.json();
+        expect(data).toEqual(newCategory);
+    });
+
+    it('should update a category', async () => {
+        const updatedCategory = { id: 1, name: 'Updated Category' };
+        fetchMock.mockResponseOnce(JSON.stringify(updatedCategory), { status: 200 });
+
+        const response = await fetch('http://localhost:3000/api/categories/1', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCategory),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories/1', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCategory),
+        });
+
+        expect(response.status).toBe(200);
+        const data = await response.json();
+        expect(data).toEqual(updatedCategory);
+    });
+
+    it('should delete a category', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify({ message: 'Category deleted' }), { status: 200 });
+
+        const response = await fetch('http://localhost:3000/api/categories/1', {
+            method: 'DELETE',
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories/1', {
+            method: 'DELETE',
+        });
+
+        expect(response.status).toBe(200);
+        const data = await response.json();
+        expect(data).toEqual({ message: 'Category deleted' });
+    });
+
     it('should return an error if the category name is missing', async () => {
-        const res = await request(app).post('/').send({});
-        expect(res.status).toBe(400);
-    })
+        fetchMock.mockResponseOnce(JSON.stringify({ error: 'Category name is required' }), { status: 400 });
+
+        const response = await fetch('http://localhost:3000/api/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        expect(response.status).toBe(400);
+        const data = await response.json();
+        expect(data).toEqual({ error: 'Category name is required' });
+    });
+
     it('should return an error if the category id is missing', async () => {
-        const res = await request(app).put('/').send({ name: 'test' });
-        expect(res.status).toBe(404);
-    })
+        fetchMock.mockResponseOnce(JSON.stringify({ error: 'Category id is required' }), { status: 404 });
+
+        const response = await fetch('http://localhost:3000/api/categories', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: 'test' }),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: 'test' }),
+        });
+
+        expect(response.status).toBe(404);
+        const data = await response.json();
+        expect(data).toEqual({ error: 'Category id is required' });
+    });
+
     it('should return an error if the category id is invalid', async () => {
-        const res = await request(app).put('/test').send({ name: 'test' });
-        expect(res.status).toBe(400);
-    })
-    it('should return an error if the category name is missing', async () => {
-        const res = await request(app).put('/1').send({});
-        expect(res.status).toBe(400);
-    })
+        fetchMock.mockResponseOnce(JSON.stringify({ error: 'Invalid category id' }), { status: 400 });
+
+        const response = await fetch('http://localhost:3000/api/categories/test', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: 'test' }),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories/test', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: 'test' }),
+        });
+
+        expect(response.status).toBe(400);
+        const data = await response.json();
+        expect(data).toEqual({ error: 'Invalid category id' });
+    });
+
+    it('should return an error if the category name is missing when updating', async () => {
+        fetchMock.mockResponseOnce(JSON.stringify({ error: 'Category name is required' }), { status: 400 });
+
+        const response = await fetch('http://localhost:3000/api/categories/1', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/api/categories/1', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        expect(response.status).toBe(400);
+        const data = await response.json();
+        expect(data).toEqual({ error: 'Category name is required' });
+    });
 });
