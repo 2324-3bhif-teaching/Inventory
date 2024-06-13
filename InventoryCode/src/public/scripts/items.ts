@@ -5,7 +5,7 @@ interface Item {
     Category: string;
     Available: string;
     Damaged: string;
-    imagePath: string;
+    Picture: string;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             contentContainer.innerHTML = "";
 
-            items.forEach((item: any) => {
+            items.forEach((item: Item) => {
                 createCard(item);
             });
         } catch (error) {
@@ -102,14 +102,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             const description = (document.getElementById("deviceDescription") as HTMLInputElement).value;
             const available = (document.getElementById("deviceAvailable") as HTMLInputElement).checked ? 'Y' : 'N';
             const damaged = (document.getElementById("deviceDamaged") as HTMLInputElement).checked ? 'Y' : 'N';
+            const fileInput = document.getElementById("fileInput") as HTMLInputElement;
 
             const newDevice = {
                 itemName: deviceName,
-                description,
+                description: description,
                 category: deviceType,
-                available,
-                damaged,
-                picture: null,
+                available: available,
+                damaged: damaged,
+                picture: ""
             };
 
             const selectedCategory = getSelectedCategory();
@@ -121,6 +122,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 },
                 body: JSON.stringify(newDevice),
             });
+
+            let res = await response.json();
 
             if (response.ok) {
                 alert("Gerät erfolgreich hinzugefügt!");
@@ -135,6 +138,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                     devicePopup.style.display = "none";
                 }
 
+                if (fileInput.files && fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    await uploadImage(file, res.value);
+                }
+
+                (document.getElementById("fileInput") as HTMLInputElement).value = '';
+
                 setSelectedCategory(selectedCategory);
                 await fetchItemsAndUpdateList();
                 await filterItemsByCategory();
@@ -144,8 +154,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (devicePopup) {
                 devicePopup.style.display = "none";
             }
+
         });
     }
+
+    const uploadImage = async (file: string | Blob, itemId : number) => {
+        const formData = new FormData();
+        formData.append('image', file);
+        try {
+            const response = await fetch(`http://localhost:3000/api/items/${itemId}/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                return (await response.json()).value;
+            } else {
+                console.error('Failed to upload image. Error ' + response.status);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            return null;
+        }
+    };
 
     const populateEditForm = (item: Item) => {
         editItemNumber.value = item.ItemNumber.toString();
@@ -318,8 +349,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         card.id = `item_${item.ItemNumber}`;
 
         const image = document.createElement("img");
-        image.src = "../img/prototypBild.png";
-        image.alt = "Robot Image";
+        console.log(item.Picture);
+        image.src = item.Picture;
+        image.alt = "Image";
         card.appendChild(image);
 
         const cardContent = document.createElement("div");
@@ -432,6 +464,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error("Error searching items:", error);
         }
     }
+
     const cancelSearchButton = document.getElementById("cancelSearchButton") as HTMLButtonElement;
 
     cancelSearchButton.addEventListener("click", async () => {
