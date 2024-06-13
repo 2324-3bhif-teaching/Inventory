@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    const saveItem = async (event: Event) => {
+    const saveItem = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
         const confirmSave = confirm("Möchten Sie die Änderungen wirklich speichern?");
@@ -263,12 +263,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             const damaged = editDamaged.checked ? 'Y' : 'N';
             const description = editDescription.value;
 
+            const currentItem = {
+                ItemNumber: itemNumber,
+                ItemName: itemName,
+                Category: category,
+                Available: available,
+                Damaged: damaged,
+                Description: description,
+                Picture: "",
+            };
+
+            const currentImage = document.querySelector(`#item_${itemNumber} img`) as HTMLImageElement;
+            if (currentImage) {
+                currentItem.Picture = currentImage.src;
+            }
+
             const payload = {
                 itemName,
                 description,
                 category,
                 available,
                 damaged,
+                picture: currentItem.Picture,
             };
 
             const selectedCategory = getSelectedCategory();
@@ -283,6 +299,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (response.ok) {
                 alert("Erfolgreich gespeichert.");
+
+                const fileInput = document.getElementById("editFileInput") as HTMLInputElement;
+                let imageUploaded = false;
+
+                if (fileInput.files && fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const itemId = parseInt(editItemNumber.value, 10);
+
+                    const imageUrl = await uploadImage(file, itemId);
+                    if (imageUrl) {
+                        imageUploaded = true;
+                    } else {
+                        console.error("Fehler beim Hochladen des Bildes.");
+                    }
+                }
+
                 await fetchItemsAndUpdateList();
                 setSelectedCategory(selectedCategory);
                 await filterItemsByCategory();
