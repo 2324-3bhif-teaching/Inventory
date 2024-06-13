@@ -1,6 +1,8 @@
-import express from "express";
+import express, {Request, Response} from "express";
 import { StatusCodes } from "http-status-codes";
 import { DB } from "../data/items";
+import upload from "../public/scripts/multerConfig";
+import {uploadRouter} from "./uploadRouter";
 
 export const itemRouter = express.Router();
 
@@ -10,7 +12,6 @@ async function getItemById(itemId: number): Promise<ItemUpdatePayload> {
     await db.close();
 
     return item;
-
 }
 
 itemRouter.get('/', async (_, res) => {
@@ -55,10 +56,12 @@ itemRouter.post('/', async (req, res) => {
             res.status(StatusCodes.BAD_REQUEST).send("Item name is required. "+ itemName + " " + description + " " + category + " " + available + " " + damaged + " " + picture);
             return;
         }
-        await db.run(`INSERT INTO Item (ItemName, Description, Category, Available, Damaged, Picture) VALUES (?, ?, ?, ?, ?, ?)`, [itemName, description, category, available, damaged, picture]);
+        const stmt = await db.run(`INSERT INTO Item (ItemName, Description, Category, Available, Damaged, Picture) VALUES (?, ?, ?, ?, ?, ?)`, [itemName, description, category, available, damaged, picture]);
         await db.close();
 
-        res.status(StatusCodes.CREATED).send("Item added.");
+        const id = stmt.lastID;
+
+        res.status(StatusCodes.CREATED).send({value: id});
     } catch (error) {
         console.log(req.body, error)
         console.error("error adding item:", error);
@@ -112,4 +115,26 @@ itemRouter.delete('/:itemId', async (req, res) => {
         console.error("Error deleting item:", error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error deleting item.");
     }
+});
+
+itemRouter.post('/:itemId/upload', upload.single('image'), async (req, res) => {
+    const id = parseInt(req.params.itemId);
+    const db = await DB.createDBConnection();
+
+    if (!req.file || isNaN(id) || id < 0 || id.toString().length === 0) {
+        return res.status(400).send('Bitte eine Datei hochladen!');
+    }
+
+    const imagePath = `images/${req.file.filename}`;
+
+    await db.run(
+        `UPDATE Item
+         SET Picture = ?
+         WHERE ItemNumber = ?`,
+        [imagePath, id]
+    );
+
+    await db.close();
+
+    res.send({ value: imagePath });
 });
