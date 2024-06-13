@@ -4,10 +4,11 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 module.exports = {
     entry: {
         login: './public/scripts/login.ts',
+        keycloak: './public/scripts/keycloak.ts',
     },
     output: {
         filename: "[name].bundle.js",
-        path: path.resolve(__dirname, './public/dist/scripts')
+        path: path.resolve(__dirname, './public/scripts/dist')
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
