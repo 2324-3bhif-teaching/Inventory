@@ -1,8 +1,13 @@
 import express from 'express';
 import { addCategory, getCategories, deleteCategory, updateCategory } from '../data/category';
 import { Request, Response } from '../data/types';
+import bodyParser from "body-parser";
 
 const router = express.Router();
+
+const app = express();
+
+app.use(bodyParser.json());
 
 router.get('/', (req: Request, res: Response) => {
     getCategories((err, categories) => {

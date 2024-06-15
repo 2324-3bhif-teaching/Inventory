@@ -2,13 +2,14 @@
 import type {Config} from '@jest/types';
 
 const config: Config.InitialOptions = {
-    roots: ['<rootDir>/test'],
+    roots: ['<rootDir>'],
     testMatch: [
-        "**/__tests__/**/*.+(scripts|tsx|js)",
-        "**/?(*.)+(spec|test).+(scripts|tsx|js)",
+        "**/__tests__/**/*.+(scripts|tsx|ts)",
+        "**/?(*.)+(spec|test).+(scripts|tsx|ts)",
     ],
     transform: {
-        "^.+\\.(ts|tsx)$": "scripts-jest",
+        '^.+\\.tsx?$': 'ts-jest',
+        '^.+\\.jsx?$': 'babel-jest',
     },
     clearMocks: true,
     collectCoverage: true,

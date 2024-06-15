@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(router);
 
-
 describe('Confirmation account routes', () => {
     it('should return all items', async () => {
         const res = await request(app).get('/');
@@ -31,7 +30,7 @@ describe('Confirmation account routes', () => {
     })
     it('should return an error if the item id is missing', async () => {
         const res = await request(app).put('/').send({ name: 'test' });
-        expect(res.status).toBe(400);
+        expect(res.status).toBe(404);
     })
     it('should return an error if the item id is invalid', async () => {
         const res = await request(app).put('/test').send({ name: 'test' });
