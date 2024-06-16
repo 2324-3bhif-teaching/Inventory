@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Inventory
+  namespace: student-b-wilflingseder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Inventory
+  template:
+    metadata:
+      labels:
+        app: Inventory
+    spec:
+      containers:
+        - name: Inventory
+          image: docker.io/bwilflingseder/Inventory:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: Inventory-svc
+  namespace: student-b-wilflingseder
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+      name: http
+  selector:
+    app: Inventory
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: Inventory-ingress
+  namespace: student-b-wilflingseder
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: student.cloud.htl-leonding.ac.at
+      http:
+        paths:
+          - path: /b.wilflingseder/Inventory/(.*)$
+            pathType: Prefix
+            backend:
+              service:
+                name: Inventory-svc
+                port:
+                  number: 80
