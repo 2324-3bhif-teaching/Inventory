@@ -25,6 +25,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     const editAvailable = document.getElementById("editAvailable") as HTMLInputElement;
     const editDamaged = document.getElementById("editDamaged") as HTMLInputElement;
     const categoryDropdown = document.getElementById("categoryDropdown") as HTMLSelectElement
+    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+    const fileLabelText = document.getElementById("fileLabelText") as HTMLSpanElement;
+    const editFileInput = document.getElementById("editFileInput") as HTMLInputElement;
+    const editFileLabelText = document.getElementById("editFileLabelText") as HTMLSpanElement;
+
+    fileInput.addEventListener("change", () => {
+        if (fileInput.files && fileInput.files.length > 0) {
+            fileLabelText.textContent = '✓ Bild hochgeladen';
+        } else {
+            fileLabelText.textContent = 'Bild auswählen';
+        }
+    });
+
+    editFileInput.addEventListener("change", () => {
+        if (editFileInput.files && editFileInput.files.length > 0) {
+            editFileLabelText.textContent = '✓ Bild hochgeladen';
+        } else {
+            editFileLabelText.textContent = 'Bild auswählen';
+        }
+    });
 
     function getSelectedCategory() {
         return categoryDropdown ? categoryDropdown.value : "all";

@@ -139,8 +139,6 @@ h1{
 .filterSeite button:hover {
     background-color: #666;
 }
-
-
 /* ############################ Cards ############################ */
 .card-container {
     display: grid;
@@ -362,14 +360,18 @@ h1{
     position: relative;
     background: white;
     margin: auto;
+    padding: 30px;
     margin-top: 10vw;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 80%;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
     text-align: center;
     animation: fadeIn 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content h2 {
+    margin-bottom: 20px;
 }
 
 @keyframes fadeIn {
@@ -385,15 +387,16 @@ h1{
 
 .popup .close-popup {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
     cursor: pointer;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 .popup .close-popup:hover {
-    color: red;
+    color: #ff5f5f;
 }
 
 .popup form {
@@ -401,27 +404,40 @@ h1{
 }
 
 .popup form input[type="text"],
-.popup form select {
+.popup form select,
+.popup form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.popup form input[type="text"]:focus,
+.popup form select:focus,
+.popup form textarea:focus {
+    border-color: #495057;
 }
 
 .popup form button {
-    background: #555;
+    width: 100%;
+    background: #343a40;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 10px;
 }
 
 .popup form button:hover {
-    background: #666;
+    background: #495057;
 }
+
 
 #QRPopup {
     display: none;
@@ -467,7 +483,7 @@ h1{
     align-items: center;
     margin: 20px auto;
     width: 80%;
-    max-width: 500px;
+    max-width: 650px;
     background-color: var(--background);
     border-radius: 30px;
     box-shadow: var(--shadow-03);
@@ -663,4 +679,80 @@ button:hover {
     font-weight: 800;
     background-color: var(--text1);
     padding: 0.7rem 1.2rem;
+}
+
+.popup form .custom-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.popup form .custom-checkbox input {
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.popup form .custom-checkbox label {
+    margin-left: 10px;
+    color: #333;
+}
+
+.popup form .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    background-color: #ccc;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+.popup form .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.popup form .custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+    content: "";
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.popup form .custom-checkbox:hover .checkmark {
+    background-color: #b3b3b3;
+}
+
+.file-label {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #343a40;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.file-label span {
+    margin-right: 10px;
+    text-align: center;
+}
+
+#fileInput, #editFileInput {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
 }
