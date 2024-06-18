@@ -20,8 +20,9 @@
     <button id="cancelSearchButton"><i class="fa-solid fa-xmark"></i></button>
 </div>
 
-<button id="addDeviceButton" ><i class="fa-solid fa-plus"></i></button>
+<button id="addDeviceButton"><i class="fa-solid fa-plus"></i></button>
 <!--<button id="login">Login</button>-->
+
 
 <div id="filterButton"><i class="fa-solid fa-filter"></i></div>
 <div id="filterFenster">
@@ -60,34 +61,46 @@
 </div>
 
 <div id="mainContent">
-    <div id="content" class="card-container"> </div>
+    <div id="content" class="card-container"></div>
 
 </div>
 
-<div id="devicePopup" class="popup" >
+<div id="devicePopup" class="popup">
     <div class="popup-content">
         <div id="closePopup" class="close-popup">&times;</div>
         <h2>Neues Gerät hinzufügen</h2>
         <form id="deviceForm" enctype="multipart/form-data">
-            <label for="deviceName">Gerätename:</label>
+            <label for="deviceName">Artikelname:</label>
             <input type="text" id="deviceName" name="deviceName" placeholder="Name des Geräts" required><br>
 
             <label for="deviceType">Kategorie:</label>
-            <select id="deviceType" name="deviceType" required>
-                <option value="">Bitte auswählen...</option>
-            </select><br>
+            <div class="select-container">
+                <select id="deviceType" name="deviceType" required>
+                    <option value="">Bitte auswählen...</option>
+
+                </select>
+            </div>
+
 
             <label for="deviceDescription">Beschreibung:</label>
-            <textarea id="deviceDescription" name="deviceDescription" rows="3" placeholder="Beschreibung..." required></textarea><br>
+            <textarea id="deviceDescription" name="deviceDescription" rows="3" placeholder="Beschreibung..."
+                      required></textarea><br>
 
-            <label for="deviceAvailable">Verfügbar:</label>
-            <input type="checkbox" id="deviceAvailable" name="deviceAvailable"><br>
+            <label class="custom-checkbox" for="deviceAvailable">Verfügbar:
+                <input type="checkbox" id="deviceAvailable" name="deviceAvailable">
+                <span class="checkmark"></span>
+            </label><br>
 
-            <label for="deviceDamaged">Beschädigt:</label>
-            <input type="checkbox" id="deviceDamaged" name="deviceDamaged"><br>
+            <label class="custom-checkbox" for="deviceDamaged">Beschädigt:
+                <input type="checkbox" id="deviceDamaged" name="deviceDamaged">
+                <span class="checkmark"></span>
+            </label><br>
 
-            <label for='fileInput'>Bild hinzufügen:</label>
-            <input id='fileInput' type="file" accept="image/*">
+            <label for="fileInput" class="file-label">
+                <span id="fileLabelText">Bild auswählen</span>
+                <input id="fileInput" type="file" accept="image/*">
+            </label>
+
 
             <button type="submit">Hinzufügen</button>
         </form>
@@ -99,31 +112,43 @@
     <div class="popup-content">
         <div id="closeEditPopup" class="close-popup">&times;</div>
         <h2>Artikel bearbeiten</h2>
-        <form id="editForm">
+        <form id="editForm" enctype="multipart/form-data">
             <input type="hidden" id="editItemNumber">
 
             <label for="editItemName">Artikelname:</label>
             <input type="text" id="editItemName" name="itemName" placeholder="Name des Artikels" required><br>
 
             <label for="editCategory">Kategorie:</label>
-            <select id="editCategory" name="category" required></select><br>
+            <div class="select-container">
+                <select id="editCategory" name="category" required>
+                    <option value="">Bitte auswählen...</option>
+                </select>
+            </div>
 
             <label for="editDescription">Beschreibung:</label>
-            <textarea id="editDescription" name="description" rows="3" placeholder="Beschreibung..."></textarea><br>
+            <textarea id="editDescription" name="description" rows="3" placeholder="Beschreibung..."
+                      required></textarea><br>
 
-            <label for="editAvailable">Verfügbar:</label>
-            <input type="checkbox" id="editAvailable" name="available"><br>
+            <label class="custom-checkbox" for="editAvailable">Verfügbar:
+                <input type="checkbox" id="editAvailable" name="available">
+                <span class="checkmark"></span>
+            </label><br>
 
-            <label for="editDamaged">Beschädigt:</label>
-            <input type="checkbox" id="editDamaged" name="damaged"><br>
+            <label class="custom-checkbox" for="editDamaged">Beschädigt:
+                <input type="checkbox" id="editDamaged" name="damaged">
+                <span class="checkmark"></span>
+            </label><br>
 
-            <label for="editFileInput">Bild ändern:</label>
-            <input id="editFileInput" type="file" accept="image/*">
+            <label for="editFileInput" class="file-label">
+                <span id="editFileLabelText">Bild auswählen</span>
+                <input id="editFileInput" type="file" accept="image/*">
+            </label>
 
             <button type="submit">Speichern</button>
         </form>
     </div>
 </div>
+
 
 <div id="QRPopup" class="popup">
     <div class="popup-content">
@@ -138,7 +163,7 @@
 </div>
 
 <script>
-    document.getElementById("filterButton").addEventListener("click", function() {
+    document.getElementById("filterButton").addEventListener("click", function () {
         let filterButton = document.getElementById("filterButton");
         let filterFenster = document.getElementById("filterFenster");
 
@@ -151,7 +176,7 @@
         }
     });
 
-    document.getElementById("schliessenButton").addEventListener("click", function() {
+    document.getElementById("schliessenButton").addEventListener("click", function () {
         let kontaktButton = document.getElementById("filterButton");
         let kontaktFenster = document.getElementById("filterFenster");
         kontaktFenster.classList.remove("show");
@@ -159,8 +184,8 @@
     });
 
 </script>
-<script type="module" src="./scripts/items.js" defer> </script>
-<script type="module" src="./scripts/categories.js" defer> </script>
+<script type="module" src="./scripts/items.js" defer></script>
+<script type="module" src="./scripts/categories.js" defer></script>
 <script type="module" src="./scripts/dist/login.bundle.js" defer></script>
 <script>var exports = {};</script>
 </body>
