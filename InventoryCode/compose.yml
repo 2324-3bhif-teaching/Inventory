@@ -1,12 +1,15 @@
 services:
     web:
-        build: ./InventoryCode/
+        build: ./
+        image: bwilflingseder/inventory:latest
         ports:
         - "3000:3000"
         volumes:
         - sqlite-data:/app/data
         depends_on:
         - sqlite
+        restart: always
+        pull_policy: always
 
     sqlite:
       container_name: my-sqlite-container

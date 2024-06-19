@@ -1,11 +1,15 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const categoryDropdown = document.getElementById("categoryDropdown");
+    const domain = "localhost:3000";
 
     fetchCategoriesAndUpdateDropdown();
 
+
     async function fetchCategoriesAndUpdateDropdown() {
         try {
-            const response = await fetch('http://localhost:3000/api/categories');
+            const response = await fetch(`http://${domain}/api/categories`);
             if (!response.ok) throw new Error("Failed to fetch categories");
             const categories = await response.json();
 
@@ -55,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const newCategoryName = (document.getElementById("newCategoryName") as HTMLInputElement).value;
             if (newCategoryName) {
                 try {
-                    const response = await fetch('http://localhost:3000/api/categories', {
+                    const response = await fetch(`http://${domain}/api/categories`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -74,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         async function fetchCategoriesAndUpdateList() {
             try {
-                const response = await fetch('http://localhost:3000/api/categories');
+                const response = await fetch(`http://${domain}/api/categories`);
                 if (!response.ok) throw new Error("Failed to fetch categories");
                 const categories = await response.json();
 
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const newName = prompt("Neuer Kategoriename:", category.name);
             if (newName && newName !== category.name) {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/categories/${category.id}`, {
+                    const response = await fetch(`http://${domain}/api/categories/${category.id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
@@ -126,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         async function deleteCategory(category : any) {
             if (confirm(`Kategorie "${category.name}" wirklich löschen?`)) {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/categories/${category.id}`, {
+                    const response = await fetch(`http://${domain}/api/categories/${category.id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json"
