@@ -8,7 +8,10 @@ interface Item {
     Picture: string;
 }
 
+
 document.addEventListener("DOMContentLoaded", async () => {
+    const domain = "localhost:3000";
+
     const addDeviceButton = document.getElementById("addDeviceButton") as HTMLButtonElement;
     const devicePopup = document.getElementById("devicePopup") as HTMLDivElement;
     const closePopup = document.getElementById("closePopup") as HTMLDivElement;
@@ -29,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fileLabelText = document.getElementById("fileLabelText") as HTMLSpanElement;
     const editFileInput = document.getElementById("editFileInput") as HTMLInputElement;
     const editFileLabelText = document.getElementById("editFileLabelText") as HTMLSpanElement;
+    const homeButton = document.getElementById("homeButton") as HTMLButtonElement;
 
     fileInput.addEventListener("change", () => {
         if (fileInput.files && fileInput.files.length > 0) {
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const fetchItemsAndUpdateList = async () => {
         try {
-            const itemsResponse = await fetch('http://localhost:3000/api/items');
+            const itemsResponse = await fetch(`http://${domain}/api/items`);
             if (!itemsResponse.ok) throw new Error("Failed to fetch items");
             const items = await itemsResponse.json();
 
@@ -67,16 +71,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             items.forEach((item: Item) => {
                 createCard(item);
             });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get("item");
+            if (itemId) {
+                showOnlyItem(itemId);
+            }
         } catch (error) {
             console.error("Error fetching and updating items:", error);
         }
     };
-
     const populateCategoryDropdown = async () => {
         if (deviceTypeDropdown) {
             deviceTypeDropdown.innerHTML = "";
             try {
-                const response = await fetch('http://localhost:3000/api/categories');
+                const response = await fetch(`http://${domain}/api/categories`);
                 if (response.ok) {
                     const categories = await response.json();
                     categories.forEach((category: { name: string | null; }) => {
@@ -135,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const selectedCategory = getSelectedCategory();
 
-            const response = await fetch('http://localhost:3000/api/items', {
+            const response = await fetch(`http://${domain}/api/items`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -182,7 +191,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const formData = new FormData();
         formData.append('image', file);
         try {
-            const response = await fetch(`http://localhost:3000/api/items/${itemId}/upload`, {
+            const response = await fetch(`http://${domain}/api/items/${itemId}/upload`, {
                 method: 'POST',
                 body: formData
             });
@@ -219,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const deleteItem = async (itemNumber: number) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
+            const response = await fetch(`http://${domain}/api/items/${itemNumber}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -248,7 +257,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const fetchCategories = async () => {
         try {
-            const categoryResponse = await fetch('http://localhost:3000/api/categories', {
+            const categoryResponse = await fetch(`http://${domain}/api/categories`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -309,7 +318,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const selectedCategory = getSelectedCategory();
 
-            const response = await fetch(`http://localhost:3000/api/items/${itemNumber}`, {
+            const response = await fetch(`http://${domain}/api/items/${itemNumber}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -369,7 +378,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const filterItemsByCategory = async () => {
         const selectedCategory = getSelectedCategory();
         try {
-            const itemsResponse = await fetch('http://localhost:3000/api/items');
+            const itemsResponse = await fetch(`http://${domain}/api/items`);
             if (!itemsResponse.ok) throw new Error("Failed to fetch items");
             const items = await itemsResponse.json();
 
@@ -458,6 +467,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
 
+    function toggleHomeButton(show: boolean) {
+        if (homeButton) {
+            homeButton.style.display = show ? "block" : "none";
+        }
+    }
+
+    function showOnlyItem(itemId: string) {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            if (card.id !== `item_${itemId}`) {
+                card.classList.add("hidden");
+            } else {
+                card.classList.remove("hidden");
+            }
+        });
+        toggleHomeButton(true);
+    }
+
+    homeButton.addEventListener("click", () => {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            card.classList.remove("hidden");
+        });
+        toggleHomeButton(false);
+        history.pushState(null, '', window.location.pathname);
+    });
+
     function showQRCode(item: any) {
         const popup = document.getElementById("QRPopup") as HTMLDivElement;
         const qrCodeImage = document.getElementById("qrCodeImage") as HTMLImageElement;
@@ -465,8 +501,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const printButton = document.getElementById("printButton") as HTMLButtonElement;
         const qrCodeSizeInput = document.getElementById("qrCodeSize") as HTMLInputElement;
 
-
-        qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/index.html#item_${item.ItemNumber}&size=100x100`;
+        qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(window.location.origin + window.location.pathname + "?item=" + item.ItemNumber)}&size=100x100`;
         popup.style.display = "block";
 
         closeButton.addEventListener("click", () => {
@@ -477,7 +512,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             printQRCode(qrCodeImage, qrCodeSizeInput.value);
         });
     }
-
     const searchButton = document.getElementById("searchButton") as HTMLButtonElement;
     const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 
@@ -496,7 +530,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function searchItems(query: string) {
         const selectedCategory = getSelectedCategory();
         try {
-            const itemsResponse = await fetch('http://localhost:3000/api/items');
+            const itemsResponse = await fetch(`http://${domain}/api/items`);
             if (!itemsResponse.ok) throw new Error("Failed to fetch items");
             const items = await itemsResponse.json();
 
@@ -516,6 +550,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error("Error searching items:", error);
         }
     }
+    await fetchItemsAndUpdateList();
 
     const cancelSearchButton = document.getElementById("cancelSearchButton") as HTMLButtonElement;
 
